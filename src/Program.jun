@@ -11,7 +11,7 @@ type flip = flipUp
           | flipFlat
 
 let numLeds : uint16 = 33
-let leds : FastLED:fastLedStrip = FastLED:make(numLeds)
+let leds : FastLed:fastLedStrip = FastLed:make(numLeds)
 
 let accState : maybe<Accelerometer:orientation> ref = ref nothing<Accelerometer:orientation>()
 let modeState : mode ref = ref setting()
@@ -55,13 +55,13 @@ fun main() : unit = (
                             prevMode
                         end
                     end, modeState, metaFlipSig);
-        Signal:sink(fn (m : mode) : unit ->
+        Signal:sink<mode>(fn (m : mode) : unit ->
             case m of
             | setting() => Setting:execute(timeRemaining, leds)
             | timing() => Timing:execute()
             | paused() => Paused:execute()
             | finale() => Finale:execute()
             end, modeSig);
-        FastLED:show()
+        FastLed:show()
     ) end
 )

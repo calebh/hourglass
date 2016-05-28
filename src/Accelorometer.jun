@@ -47,7 +47,7 @@ fun readRaw(a : axis) : uint16 = (
     let mutable total : uint32 = 0;
     for i : uint8 in 0 to 3 do
         set total = total + Io:anaRead(pin)
-    end
+    end;
     total / 4
 )
 
@@ -60,15 +60,15 @@ fun getOrientation() : maybe<orientation> = (
     let xScaled = read(xAxis());
     let yScaled = read(yAxis());
     let zScaled = read(zAxis());
-    if zScaled < -800 then
+    if -800 > zScaled then
         just<orientation>(zDown())
     elif zScaled > 800 then
         just<orientation>(zUp())
-    elif yScaled < -800 then
+    elif -800 > yScaled then
         just<orientation>(yDown())
     elif yScaled > 800 then
         just<orientation>(yUp())
-    elif xScaled < -800 then
+    elif -800 > xScaled then
         just<orientation>(xDown())
     elif xScaled > 800 then
         just<orientation>(xUp())
@@ -77,4 +77,4 @@ fun getOrientation() : maybe<orientation> = (
     end
 )
 
-fun getSignal() : signal<orientation> = signal<orientation>(getOrientation())
+fun getSignal() : sig<orientation> = signal<orientation>(getOrientation())
