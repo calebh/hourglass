@@ -1,0 +1,11 @@
+module SignalExt
+open(Prelude)
+export(constant, meta)
+
+fun constant<'a>(val : 'a) : sig<'a> =
+    signal<'a>(just<'a>(val))
+
+fun meta<'a>(sigA : sig<'a>) : sig<maybe<'a>> = (
+    let signal<'a>(val) = sigA;
+    constant<maybe<'a>>(val)
+)

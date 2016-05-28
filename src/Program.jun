@@ -1,0 +1,67 @@
+module Program
+open(Prelude)
+
+type mode = setting
+          | timing
+          | paused
+          | finale
+
+type flip = flipUp
+          | flipDown
+          | flipFlat
+
+let numLeds : uint16 = 33
+let leds : FastLED:fastLedStrip = FastLED:make(numLeds)
+
+let accState : maybe<Accelerometer:orientation> ref = ref nothing<Accelerometer:orientation>()
+let modeState : mode ref = ref setting()
+
+let timeRemaining : uint32 ref = ref 0
+
+fun setup() : unit =
+    Time:wait(500)
+
+fun main() : unit = (
+    setup();
+    while true do (
+        let accSig = Signal:dropRepeats<Accelerometer:orientation>(Accelerometer:getSignal(), accState);
+        let flipSig =
+            Signal:map<Accelerometer:orientation, flip>(
+                fn (o : Accelerometer:orientation) : flip ->
+                    case o of
+                    | Accelerometer:xUp() => flipUp()
+                    | Accelerometer:xDown() => flipDown()
+                    | _  => flipFlat()
+                    end, accSig);
+        let metaFlipSig = SignalExt:meta<flip>(flipSig);
+        let modeSig =
+            Signal:foldP<maybe<flip>, mode>(
+                fn (f1 : maybe<flip>, prevMode : mode) : mode ->
+                    if (prevMode == timing()) and (!timeRemaining == 0) then
+                        finale()
+                    else
+                        case f1 of
+                        | just<flip>(f2) =>
+                            // There is a flip event on the metaFlipSig
+                            case (f2, prevMode) of
+                            | (flipDown(), setting()) => timing()
+                            | (flipUp(),   timing())  => (Setting:reset(timeRemaining); setting())
+                            | (flipUp(),   paused())  => (Setting:reset(timeRemaining); setting())
+                            | (flipFlat(), timing())  => paused()
+                            | _ => prevMode
+                            end
+                        | _ =>
+                            // There wasn't a flip event on the metaFlipSig
+                            prevMode
+                        end
+                    end, modeState, metaFlipSig);
+        Signal:sink(fn (m : mode) : unit ->
+            case m of
+            | setting() => Setting:execute(timeRemaining, leds)
+            | timing() => Timing:execute()
+            | paused() => Paused:execute()
+            | finale() => Finale:execute()
+            end, modeSig);
+        FastLED:show()
+    ) end
+)

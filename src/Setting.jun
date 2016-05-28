@@ -1,0 +1,32 @@
+module Setting
+open(Prelude)
+export(execute)
+
+let bState : Button:buttonState ref = Button:state()
+let bEdgeState : Io:pinState ref = ref Io:low()
+let buttonPin : uint16 = 4
+let numLeds : uint16 = 33
+let numLedsLit : uint16 ref = ref 1
+let blue : FastLed:color = FastLed:color { r=0; g=0; b=255 }
+
+fun reset(timeRemaining : uint32 ref) : unit = (
+    set ref numLedsLit = 1;
+    set ref timeRemaining = 60000;
+    ()
+)
+
+fun execute(timeRemaining : uint32 ref, leds : FastLED:fastLedStrip) : unit = (
+    let buttonSig = Io:risingEdge(Button:debounce(Io:digIn(buttonPin), bState), bEdgeState);
+    let numLedsLitSig =
+        Signal:foldP(
+            fn (u : unit, prevNumLedsLit : uint16) : uint16 ->
+                prevNumLedsLit + 1,
+            numLedsLit, buttonSig);
+    Signal:sink<uint16>(
+        fn (n : uint16) : unit ->
+            (set ref timeRemaining = n * 60000;
+            for i : uint16 in 0 to n - 1 do
+                FastLed:setLedColor(i, blue, leds)
+            end),
+        numLedsLitSig)
+)
