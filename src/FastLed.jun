@@ -13,7 +13,7 @@ fun make(numLeds : uint16) : fastLedStrip = (
     CRGB *leds = new CRGB[numLeds];
     p.set((void *) leds);
     FastLED.addLeds<WS2812, 6, RGB>(leds, numLeds);
-    FastLED.setBrightness(MAX_BRIGHTNESS);
+    //FastLED.setBrightness(MAX_BRIGHTNESS);
     #;
     Io:setPinMode(6, Io:output());
     fastLedStrip { ptr = p }
@@ -24,10 +24,11 @@ fun setLedColor(n : uint16, c : color, strip : fastLedStrip) : unit = (
     let r = c.r;
     let g = c.g;
     let b = c.b;
-    #((CRGB *) p.get())[n] = CRGB(r, g, b);#
+    #((CRGB *) p.get())[n] = CRGB(g, r, b);#
 )
 
 fun getLedColor(n : uint16, strip : fastLedStrip) : color = (
+    let p = strip.ptr;
     let mutable r : uint8 = 0;
     let mutable g : uint8 = 0;
     let mutable b : uint8 = 0;

@@ -16,14 +16,22 @@ let leds : FastLed:fastLedStrip = FastLed:make(numLeds)
 let accState : maybe<Accelerometer:orientation> ref = ref nothing<Accelerometer:orientation>()
 let modeState : mode ref = ref setting()
 
-let timeRemaining : uint32 ref = ref 0
+let timeRemaining : int32 ref = ref 0
 
 fun setup() : unit =
     Time:wait(500)
 
 fun main() : unit = (
     setup();
+    let blank = FastLed:color {r=0; g=0; b=0 };
+    let red = FastLed:color {r=255; g=0; b=0 };
+    let green = FastLed:color {r=0; g=255; b=0 };
+    let blue = FastLed:color {r=0; g=0; b=255 };
+    let white = FastLed:color {r=255; g=255; b=255 };
     while true do (
+        for i : uint16 in 0 to 32 do
+            FastLed:setLedColor(i, blank, leds)
+        end;
         let accSig = Signal:dropRepeats<Accelerometer:orientation>(Accelerometer:getSignal(), accState);
         let flipSig =
             Signal:map<Accelerometer:orientation, flip>(
@@ -41,12 +49,13 @@ fun main() : unit = (
                         finale()
                     else
                         case f1 of
-                        | just<flip>(f2) =>
+                        | just<flip>(f2 : flip) =>
                             // There is a flip event on the metaFlipSig
                             case (f2, prevMode) of
-                            | (flipDown(), setting()) => timing()
-                            | (flipUp(),   timing())  => (Setting:reset(timeRemaining); setting())
-                            | (flipUp(),   paused())  => (Setting:reset(timeRemaining); setting())
+                            | (flipUp(),   setting()) => timing()
+                            | (flipUp(),   paused())  => timing()
+                            | (flipDown(), timing())  => (Setting:reset(timeRemaining); setting())
+                            | (flipDown(), paused())  => (Setting:reset(timeRemaining); setting())
                             | (flipFlat(), timing())  => paused()
                             | _ => prevMode
                             end
@@ -57,10 +66,10 @@ fun main() : unit = (
                     end, modeState, metaFlipSig);
         Signal:sink<mode>(fn (m : mode) : unit ->
             case m of
-            | setting() => Setting:execute(timeRemaining, leds)
-            | timing() => Timing:execute()
-            | paused() => Paused:execute()
-            | finale() => Finale:execute()
+            | setting() => (FastLed:setLedColor(0, red, leds); Setting:execute(timeRemaining, leds))
+            | timing() => (FastLed:setLedColor(1, green, leds); Timing:execute())
+            | paused() => (FastLed:setLedColor(2, blue, leds); Paused:execute())
+            | finale() => (FastLed:setLedColor(3, white, leds); Finale:execute())
             end, modeSig);
         FastLed:show()
     ) end

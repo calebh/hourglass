@@ -33,7 +33,7 @@ fun axisToPin(a : axis) : uint16 =
     end
 
 // X: 404-612, Y: 409-622, Z: 418-622
-fun axisToRange(a : axis) : (uint16 * uint16) =
+fun axisToRange(a : axis) : (int32 * int32) =
     case a of
     | xAxis() => (404, 612)
     | yAxis() => (409, 622)

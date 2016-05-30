@@ -6,27 +6,31 @@ let bState : Button:buttonState ref = Button:state()
 let bEdgeState : Io:pinState ref = ref Io:low()
 let buttonPin : uint16 = 4
 let numLeds : uint16 = 33
-let numLedsLit : uint16 ref = ref 1
+let numLedsLit : int32 ref = ref 1
 let blue : FastLed:color = FastLed:color { r=0; g=0; b=255 }
 
-fun reset(timeRemaining : uint32 ref) : unit = (
+let numLedsLitState : int32 ref = ref !numLedsLit
+
+fun reset(timeRemaining : int32 ref) : unit = (
     set ref numLedsLit = 1;
+    set ref numLedsLitState = 1;
     set ref timeRemaining = 60000;
     ()
 )
 
-fun execute(timeRemaining : uint32 ref, leds : FastLed:fastLedStrip) : unit = (
+fun execute(timeRemaining : int32 ref, leds : FastLed:fastLedStrip) : unit = (
     let buttonSig = Io:risingEdge(Button:debounce(Io:digIn(buttonPin), bState), bEdgeState);
-    let numLedsLitSig =
-        Signal:foldP<unit,uint16>(
-            fn (u : unit, prevNumLedsLit : uint16) : uint16 ->
+    let numLedsLitUpdateSig =
+        Signal:foldP<unit,int32>(
+            fn (u : unit, prevNumLedsLit : int32) : int32 ->
                 prevNumLedsLit + 1,
             numLedsLit, buttonSig);
-    Signal:sink<uint16>(
-        fn (n : uint16) : unit ->
+    let numLedsLitSig = Signal:latch<int32>(numLedsLitUpdateSig, numLedsLitState);
+    Signal:sink<int32>(
+        fn (n : int32) : unit ->
             (set ref timeRemaining = n * 60000;
             for i : uint16 in 0 to n - 1 do
-                FastLed:setLedColor(i, blue, leds)
+                FastLed:setLedColor(numLeds - i - 1, blue, leds)
             end),
         numLedsLitSig)
 )
