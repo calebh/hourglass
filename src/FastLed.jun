@@ -38,7 +38,7 @@ fun getLedColor(n : uint16, strip : fastLedStrip) : color = (
     g = c.g;
     b = c.b;
     #;
-    color { r=r; g=g; b=b }
+    color { r=g; g=r; b=b }
 )
 
 fun show() : unit =

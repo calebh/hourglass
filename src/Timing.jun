@@ -1,5 +1,40 @@
 module Timing
-open(Prelude)
-export(execute)
+open(Prelude, Constants)
+export(execute, reset)
 
-fun execute() : unit = ()
+let lastTime : int32 ref = ref 0
+
+fun reset() : unit = (
+    set ref lastTime = Time:now();
+    ()
+)
+
+fun interpolate(c1 : FastLed:color, c2 : FastLed:color, t : float) : FastLed:color = (
+    let FastLed:color {r=r1; g=g1; b=b1} = c1;
+    let FastLed:color {r=r2; g=g2; b=b2} = c2;
+    FastLed:color {
+        r = (t * r1) + ((1.0 - t) * r2);
+        g = (t * g1) + ((1.0 - t) * g2);
+        b = (t * b1) + ((1.0 - t) * b2)
+    }
+)
+
+fun execute(timeRemaining : int32 ref, totalTime : int32) : unit = (
+    let currentTime = Time:now();
+    let deltaT = currentTime - !lastTime;
+    set ref timeRemaining = !timeRemaining - deltaT;
+    set ref lastTime = currentTime;
+    let timeRemainingF : float = !timeRemaining;
+    let totalTimeF : float = totalTime;
+    let tPrime : float = timeRemainingF / totalTimeF;
+    let numLedsF : float = numLeds;
+    for i : int32 in 0 to numLeds - 1 do (
+        let pos = Math:min_(((i+1)*numLeds) - ((1-tPrime)*numLeds*numLeds), i);
+        if (0.0 <= pos) and (numLeds > pos) then
+            FastLed:setLedColor(pos, interpolate(red, green, i / numLedsF), leds)
+        else
+            ()
+        end
+    ) end;
+    ()
+)

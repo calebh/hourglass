@@ -1,0 +1,80 @@
+module Accelerometer
+open(Prelude)
+export(orientation, xUp, xDown, yUp, yDown, zUp, zDown, getSignal)
+
+type axis = xAxis
+          | yAxis
+          | zAxis
+
+type orientation = xUp
+                 | xDown
+                 | yUp
+                 | yDown
+                 | zUp
+                 | zDown
+
+let xPin : uint16 = (let mutable p : uint16 = 0;
+                     #p = A0;#;
+                     p)
+
+let yPin : uint16 = (let mutable p : uint16 = 0;
+                     #p = A1;#;
+                     p)
+
+let zPin : uint16 = (let mutable p : uint16 = 0;
+                     #p = A2;#;
+                     p)
+
+fun axisToPin(a : axis) : uint16 =
+    case a of
+    | xAxis() => xPin
+    | yAxis() => yPin
+    | zAxis() => zPin
+    end
+
+// X: 404-612, Y: 409-622, Z: 418-622
+fun axisToRange(a : axis) : (int32 * int32) =
+    case a of
+    | xAxis() => (404, 612)
+    | yAxis() => (409, 622)
+    | zAxis() => (418, 622)
+    end
+
+fun readRaw(a : axis) : uint16 = (
+    let pin = axisToPin(a);
+    Io:anaRead(pin);
+    Time:wait(1);
+    let mutable total : uint32 = 0;
+    for i : uint8 in 0 to 3 do
+        set total = total + Io:anaRead(pin)
+    end;
+    total / 4
+)
+
+fun read(a : axis) : int16 = (
+    let (min, max) = axisToRange(a);
+    Math:mapRange(readRaw(a), min, max, -1000, 1000)
+)
+
+fun getOrientation() : maybe<orientation> = (
+    let xScaled = read(xAxis());
+    let yScaled = read(yAxis());
+    let zScaled = read(zAxis());
+    if -800 > zScaled then
+        just<orientation>(zDown())
+    elif zScaled > 800 then
+        just<orientation>(zUp())
+    elif -800 > yScaled then
+        just<orientation>(yDown())
+    elif yScaled > 800 then
+        just<orientation>(yUp())
+    elif -800 > xScaled then
+        just<orientation>(xDown())
+    elif xScaled > 800 then
+        just<orientation>(xUp())
+    else
+        nothing<orientation>()
+    end
+)
+
+fun getSignal() : sig<orientation> = signal<orientation>(getOrientation())

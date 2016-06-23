@@ -9,3 +9,17 @@ fun meta<'a>(sigA : sig<'a>) : sig<maybe<'a>> = (
     let signal<'a>(val) = sigA;
     constant<maybe<'a>>(val)
 )
+
+fun unmeta<'a>(sigA : sig<maybe<'a>>) : sig<'a> =
+    case sigA of
+    | signal<maybe<'a>>(just<maybe<'a>>(just<'a>(val))) =>
+        constant<'a>(val)
+    | _ =>
+        signal<'a>(nothing<'a>())
+    end
+
+fun zip<'a,'b>(sigA : sig<'a>, sigB : sig<'b>, state : ('a * 'b) ref) : sig<('a * 'b)> =
+    Signal:map2<'a,'b,('a*'b)>(
+        fn (valA : 'a, valB : 'b) : ('a * 'b) ->
+            (valA, valB),
+        sigA, sigB, state)

@@ -1,0 +1,11 @@
+module IoExt
+open(Prelude)
+export(every)
+
+fun every(interval : uint32, tState : Time:timerState ref, outState : Io:pinState ref) : sig<Io:pinState> = (
+    let timerSig = Time:every(interval, tState);
+    Signal:foldP<uint32, Io:pinState>(
+        fn (currentTime : uint32, lastState : Io:pinState) : Io:pinState ->
+            Io:toggle(lastState),
+        outState, timerSig)
+)

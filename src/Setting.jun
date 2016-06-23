@@ -1,36 +1,82 @@
 module Setting
-open(Prelude)
+open(Prelude, Constants)
 export(execute)
+
+type timeSetting = { minutes : int32; fifteenSeconds : int32 }
 
 let bState : Button:buttonState ref = Button:state()
 let bEdgeState : Io:pinState ref = ref Io:low()
-let buttonPin : uint16 = 4
-let numLeds : uint16 = 33
-let numLedsLit : int32 ref = ref 1
-let blue : FastLed:color = FastLed:color { r=0; g=0; b=255 }
-
-let numLedsLitState : int32 ref = ref !numLedsLit
+let numLedsLit : timeSetting ref = ref (timeSetting {minutes=0; fifteenSeconds=0})
+let tState : Time:timerState ref = Time:state()
+let cursorState : Io:pinState ref = ref Io:low()
+let outputUpdateState : (Io:pinState * timeSetting) ref = ref (!cursorState, !numLedsLit)
+let outputState : (Io:pinState * timeSetting) ref = ref !outputUpdateState
 
 fun reset(timeRemaining : int32 ref) : unit = (
-    set ref numLedsLit = 1;
-    set ref numLedsLitState = 1;
-    set ref timeRemaining = 60000;
+    set ref numLedsLit = timeSetting {minutes=0; fifteenSeconds=0};
+    set ref cursorState = Io:low();
+    set ref outputUpdateState = (!cursorState, !numLedsLit);
+    set ref outputState = !outputUpdateState;
+    set ref timeRemaining = 0;
     ()
 )
 
-fun execute(timeRemaining : int32 ref, leds : FastLed:fastLedStrip) : unit = (
-    let buttonSig = Io:risingEdge(Button:debounce(Io:digIn(buttonPin), bState), bEdgeState);
+fun execute(timeRemaining : int32 ref) : unit = (
+    let cursorSig = IoExt:every(500, tState, cursorState);
+    let buttonSig =
+        Io:risingEdge(
+            Button:debounce(Io:digIn(buttonPin), bState),
+            bEdgeState);
     let numLedsLitUpdateSig =
-        Signal:foldP<unit,int32>(
-            fn (u : unit, prevNumLedsLit : int32) : int32 ->
-                prevNumLedsLit + 1,
+        Signal:foldP<unit,timeSetting>(
+            fn (u : unit, prevSetting : timeSetting) : timeSetting ->
+                (let timeSetting {
+                    minutes=prevMinutes;
+                    fifteenSeconds=prevFifteenSeconds} = prevSetting;
+                // For safety
+                if (prevMinutes + prevFifteenSeconds + 1) >= numLeds then
+                    prevSetting
+                elif ((prevFifteenSeconds + 1) mod 4) == 0 then
+                    timeSetting {
+                        minutes = prevMinutes + 1;
+                        fifteenSeconds = 0}
+                else
+                    timeSetting {
+                        minutes = prevMinutes;
+                        fifteenSeconds = prevFifteenSeconds + 1}
+                end),
             numLedsLit, buttonSig);
-    let numLedsLitSig = Signal:latch<int32>(numLedsLitUpdateSig, numLedsLitState);
-    Signal:sink<int32>(
-        fn (n : int32) : unit ->
-            (set ref timeRemaining = n * 60000;
-            for i : uint16 in 0 to n - 1 do
+    // zip the cursor and button signal
+    let outputUpdateSig =
+        SignalExt:zip<Io:pinState,timeSetting>(
+            cursorSig, numLedsLitUpdateSig, outputUpdateState);
+    // Latch the output sig since we want the next sink call to
+    // execute every frame
+    let outputSig =
+        Signal:latch<(Io:pinState * timeSetting)>(
+            outputUpdateSig, outputState);
+    Signal:sink<(Io:pinState * timeSetting)>(
+        fn (out : (Io:pinState * timeSetting)) : unit ->
+            (let (cursor, timeSetting {
+                              minutes = numMinutes;
+                              fifteenSeconds = numFifteenSeconds}) = out;
+            set ref timeRemaining = (numMinutes * 60000) +
+                                    (numFifteenSeconds * 15000);
+            // Draw the number of minutes
+            for i : int32 in 0 to numMinutes - 1 do
                 FastLed:setLedColor(numLeds - i - 1, blue, leds)
+            end;
+            // Draw the number of 15 seconds
+            for i : int32 in 0 to numFifteenSeconds - 1 do
+                FastLed:setLedColor(numLeds - (numMinutes + i) - 1, pink, leds)
+            end;
+            case cursor of
+            | Io:high() =>
+                FastLed:setLedColor(
+                    numLeds - (numMinutes + numFifteenSeconds) - 1,
+                    white, leds)
+            | _ =>
+                ()
             end),
-        numLedsLitSig)
+        outputSig)
 )

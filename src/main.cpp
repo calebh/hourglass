@@ -529,10 +529,10 @@ namespace Prelude {
     template<typename a, typename b>
     a fst(Prelude::tuple2<a,b> tup) {
         return (([&]() -> a {
-            Prelude::tuple2<a,b> guid748 = tup;
+            Prelude::tuple2<a,b> guid859 = tup;
             return (true ? 
                 (([&]() -> a {
-                    a x = (guid748).e1;
+                    a x = (guid859).e1;
                     return x;
                 })())
             :
@@ -543,10 +543,10 @@ namespace Prelude {
     template<typename a, typename b>
     b snd(Prelude::tuple2<a,b> tup) {
         return (([&]() -> b {
-            Prelude::tuple2<a,b> guid749 = tup;
+            Prelude::tuple2<a,b> guid860 = tup;
             return (true ? 
                 (([&]() -> b {
-                    b x = (guid749).e2;
+                    b x = (guid860).e2;
                     return x;
                 })())
             :
@@ -567,25 +567,25 @@ namespace List {
     template<typename a, typename b, int n>
     Prelude::list<b, n> map(juniper::function<b(a)> f, Prelude::list<a, n> lst) {
         return (([&]() -> Prelude::list<b, n> {
-            auto guid750 = (juniper::array<b, n>());
+            auto guid861 = (juniper::array<b, n>());
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            juniper::array<b,n> ret = guid750;
+            juniper::array<b,n> ret = guid861;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid751 = 0;
-                uint32_t guid752 = ((lst).length - 1);
-                for (uint32_t i = guid751; i <= guid752; i++) {
+                uint32_t guid862 = 0;
+                uint32_t guid863 = ((lst).length - 1);
+                for (uint32_t i = guid862; i <= guid863; i++) {
                     ((ret)[i] = f(((lst).data)[i]));
                 }
                 return {};
             })());
             return (([&]() -> Prelude::list<b, n>{
-                Prelude::list<b, n> guid753;
-                guid753.data = ret;
-                guid753.length = (lst).length;
-                return guid753;
+                Prelude::list<b, n> guid864;
+                guid864.data = ret;
+                guid864.length = (lst).length;
+                return guid864;
             })());
         })());
     }
@@ -593,16 +593,16 @@ namespace List {
     template<typename t, typename state, int n>
     state foldl(juniper::function<state(t,state)> f, state initState, Prelude::list<t, n> lst) {
         return (([&]() -> state {
-            auto guid754 = initState;
+            auto guid865 = initState;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            state s = guid754;
+            state s = guid865;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid755 = 0;
-                uint32_t guid756 = ((lst).length - 1);
-                for (uint32_t i = guid755; i <= guid756; i++) {
+                uint32_t guid866 = 0;
+                uint32_t guid867 = ((lst).length - 1);
+                for (uint32_t i = guid866; i <= guid867; i++) {
                     (s = f(((lst).data)[i], s));
                 }
                 return {};
@@ -614,16 +614,16 @@ namespace List {
     template<typename t, typename state, int n>
     state foldr(juniper::function<state(t,state)> f, state initState, Prelude::list<t, n> lst) {
         return (([&]() -> state {
-            auto guid757 = initState;
+            auto guid868 = initState;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            state s = guid757;
+            state s = guid868;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid758 = ((lst).length - 1);
-                uint32_t guid759 = 0;
-                for (uint32_t i = guid758; i >= guid759; i--) {
+                uint32_t guid869 = ((lst).length - 1);
+                uint32_t guid870 = 0;
+                for (uint32_t i = guid869; i >= guid870; i--) {
                     (s = f(((lst).data)[i], s));
                 }
                 return {};
@@ -635,27 +635,27 @@ namespace List {
     template<typename t, int aCap, int bCap, int retCap>
     Prelude::list<t, retCap> append(Prelude::list<t, aCap> lstA, Prelude::list<t, bCap> lstB) {
         return (([&]() -> Prelude::list<t, retCap> {
-            auto guid760 = 0;
+            auto guid871 = 0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint32_t j = guid760;
+            uint32_t j = guid871;
             
-            auto guid761 = (([&]() -> Prelude::list<t, retCap>{
-                Prelude::list<t, retCap> guid762;
-                guid762.data = (juniper::array<t, retCap>());
-                guid762.length = ((lstA).length + (lstB).length);
-                return guid762;
+            auto guid872 = (([&]() -> Prelude::list<t, retCap>{
+                Prelude::list<t, retCap> guid873;
+                guid873.data = (juniper::array<t, retCap>());
+                guid873.length = ((lstA).length + (lstB).length);
+                return guid873;
             })());
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            Prelude::list<t, retCap> out = guid761;
+            Prelude::list<t, retCap> out = guid872;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid763 = 0;
-                uint32_t guid764 = ((lstA).length - 1);
-                for (uint32_t i = guid763; i <= guid764; i++) {
+                uint32_t guid874 = 0;
+                uint32_t guid875 = ((lstA).length - 1);
+                for (uint32_t i = guid874; i <= guid875; i++) {
                     (([&]() -> int32_t {
                         (((out).data)[j] = ((lstA).data)[i]);
                         return (j = (j + 1));
@@ -664,9 +664,9 @@ namespace List {
                 return {};
             })());
             (([&]() -> Prelude::unit {
-                uint32_t guid765 = 0;
-                uint32_t guid766 = ((lstB).length - 1);
-                for (uint32_t i = guid765; i <= guid766; i++) {
+                uint32_t guid876 = 0;
+                uint32_t guid877 = ((lstB).length - 1);
+                for (uint32_t i = guid876; i <= guid877; i++) {
                     (([&]() -> int32_t {
                         (((out).data)[j] = ((lstB).data)[i]);
                         return (j = (j + 1));
@@ -689,26 +689,26 @@ namespace List {
     template<typename t, int m, int n>
     Prelude::list<t, (m)*(n)> flattenSafe(Prelude::list<Prelude::list<t, m>, n> listOfLists) {
         return (([&]() -> Prelude::list<t, (m)*(n)> {
-            auto guid767 = (juniper::array<t, (m)*(n)>());
+            auto guid878 = (juniper::array<t, (m)*(n)>());
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            juniper::array<t,(m)*(n)> ret = guid767;
+            juniper::array<t,(m)*(n)> ret = guid878;
             
-            auto guid768 = 0;
+            auto guid879 = 0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint32_t index = guid768;
+            uint32_t index = guid879;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid769 = 0;
-                uint32_t guid770 = ((listOfLists).length - 1);
-                for (uint32_t i = guid769; i <= guid770; i++) {
+                uint32_t guid880 = 0;
+                uint32_t guid881 = ((listOfLists).length - 1);
+                for (uint32_t i = guid880; i <= guid881; i++) {
                     (([&]() -> Prelude::unit {
-                        uint32_t guid771 = 0;
-                        uint32_t guid772 = ((((listOfLists).data)[i]).length - 1);
-                        for (uint32_t j = guid771; j <= guid772; j++) {
+                        uint32_t guid882 = 0;
+                        uint32_t guid883 = ((((listOfLists).data)[i]).length - 1);
+                        for (uint32_t j = guid882; j <= guid883; j++) {
                             (([&]() -> int32_t {
                                 ((ret)[index] = ((((listOfLists).data)[i]).data)[j]);
                                 return (index = (index + 1));
@@ -720,10 +720,10 @@ namespace List {
                 return {};
             })());
             return (([&]() -> Prelude::list<t, (m)*(n)>{
-                Prelude::list<t, (m)*(n)> guid773;
-                guid773.data = ret;
-                guid773.length = index;
-                return guid773;
+                Prelude::list<t, (m)*(n)> guid884;
+                guid884.data = ret;
+                guid884.length = index;
+                return guid884;
             })());
         })());
     }
@@ -731,25 +731,25 @@ namespace List {
     template<typename t, int n, int m>
     Prelude::list<t, m> resize(Prelude::list<t, n> lst) {
         return (([&]() -> Prelude::list<t, m> {
-            auto guid774 = (juniper::array<t, m>());
+            auto guid885 = (juniper::array<t, m>());
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            juniper::array<t,m> ret = guid774;
+            juniper::array<t,m> ret = guid885;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid775 = 0;
-                uint32_t guid776 = ((lst).length - 1);
-                for (uint32_t i = guid775; i <= guid776; i++) {
+                uint32_t guid886 = 0;
+                uint32_t guid887 = ((lst).length - 1);
+                for (uint32_t i = guid886; i <= guid887; i++) {
                     ((ret)[i] = ((lst).data)[i]);
                 }
                 return {};
             })());
             return (([&]() -> Prelude::list<t, m>{
-                Prelude::list<t, m> guid777;
-                guid777.data = ret;
-                guid777.length = (lst).length;
-                return guid777;
+                Prelude::list<t, m> guid888;
+                guid888.data = ret;
+                guid888.length = (lst).length;
+                return guid888;
             })());
         })());
     }
@@ -757,16 +757,16 @@ namespace List {
     template<typename t, int n>
     bool all(juniper::function<bool(t)> pred, Prelude::list<t, n> lst) {
         return (([&]() -> bool {
-            auto guid778 = true;
+            auto guid889 = true;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            bool satisfied = guid778;
+            bool satisfied = guid889;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid779 = 0;
-                uint32_t guid780 = ((lst).length - 1);
-                for (uint32_t i = guid779; i <= guid780; i++) {
+                uint32_t guid890 = 0;
+                uint32_t guid891 = ((lst).length - 1);
+                for (uint32_t i = guid890; i <= guid891; i++) {
                     (satisfied ? 
                         (([&]() -> Prelude::unit {
                             (satisfied = pred(((lst).data)[i]));
@@ -784,16 +784,16 @@ namespace List {
     template<typename t, int n>
     bool any(juniper::function<bool(t)> pred, Prelude::list<t, n> lst) {
         return (([&]() -> bool {
-            auto guid781 = false;
+            auto guid892 = false;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            bool satisfied = guid781;
+            bool satisfied = guid892;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid782 = 0;
-                uint32_t guid783 = ((lst).length - 1);
-                for (uint32_t i = guid782; i <= guid783; i++) {
+                uint32_t guid893 = 0;
+                uint32_t guid894 = ((lst).length - 1);
+                for (uint32_t i = guid893; i <= guid894; i++) {
                     (!(satisfied) ? 
                         (([&]() -> Prelude::unit {
                             (satisfied = pred(((lst).data)[i]));
@@ -814,11 +814,11 @@ namespace List {
             juniper::quit<Prelude::list<t, n>>()
         :
             (([&]() -> Prelude::list<t, n> {
-                auto guid784 = lst;
+                auto guid895 = lst;
                 if (!(true)) {
                     juniper::quit<Prelude::unit>();
                 }
-                Prelude::list<t, n> ret = guid784;
+                Prelude::list<t, n> ret = guid895;
                 
                 (((ret).data)[(lst).length] = elem);
                 ((ret).length = ((lst).length + 1));
@@ -829,16 +829,16 @@ namespace List {
     template<typename t, int n>
     Prelude::list<t, n> pushOffFront(t elem, Prelude::list<t, n> lst) {
         return (([&]() -> Prelude::list<t, n> {
-            auto guid785 = lst;
+            auto guid896 = lst;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            Prelude::list<t, n> ret = guid785;
+            Prelude::list<t, n> ret = guid896;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid786 = (n - 2);
-                uint32_t guid787 = 0;
-                for (uint32_t i = guid786; i >= guid787; i--) {
+                uint32_t guid897 = (n - 2);
+                uint32_t guid898 = 0;
+                for (uint32_t i = guid897; i >= guid898; i--) {
                     (((ret).data)[(i + 1)] = ((ret).data)[i]);
                 }
                 return {};
@@ -860,11 +860,11 @@ namespace List {
             juniper::quit<Prelude::list<t, n>>()
         :
             (([&]() -> Prelude::list<t, n> {
-                auto guid788 = lst;
+                auto guid899 = lst;
                 if (!(true)) {
                     juniper::quit<Prelude::unit>();
                 }
-                Prelude::list<t, n> ret = guid788;
+                Prelude::list<t, n> ret = guid899;
                 
                 (((ret).data)[index] = elem);
                 return ret;
@@ -874,32 +874,32 @@ namespace List {
     template<typename t, int n>
     Prelude::list<t, n> replicate(uint32_t numOfElements, t elem) {
         return (([&]() -> Prelude::list<t, n>{
-            Prelude::list<t, n> guid789;
-            guid789.data = (juniper::array<t, n>().fill(elem));
-            guid789.length = numOfElements;
-            return guid789;
+            Prelude::list<t, n> guid900;
+            guid900.data = (juniper::array<t, n>().fill(elem));
+            guid900.length = numOfElements;
+            return guid900;
         })());
     }
 
     template<typename t, int n>
     Prelude::list<t, n> remove(t elem, Prelude::list<t, n> lst) {
         return (([&]() -> Prelude::list<t, n> {
-            auto guid790 = 0;
+            auto guid901 = 0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint32_t index = guid790;
+            uint32_t index = guid901;
             
-            auto guid791 = false;
+            auto guid902 = false;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            bool found = guid791;
+            bool found = guid902;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid792 = 0;
-                uint32_t guid793 = ((lst).length - 1);
-                for (uint32_t i = guid792; i <= guid793; i++) {
+                uint32_t guid903 = 0;
+                uint32_t guid904 = ((lst).length - 1);
+                for (uint32_t i = guid903; i <= guid904; i++) {
                     ((!(found) && (((lst).data)[i] == elem)) ? 
                         (([&]() -> Prelude::unit {
                             (index = i);
@@ -913,17 +913,17 @@ namespace List {
             })());
             return (found ? 
                 (([&]() -> Prelude::list<t, n> {
-                    auto guid794 = lst;
+                    auto guid905 = lst;
                     if (!(true)) {
                         juniper::quit<Prelude::unit>();
                     }
-                    Prelude::list<t, n> ret = guid794;
+                    Prelude::list<t, n> ret = guid905;
                     
                     ((ret).length = ((lst).length - 1));
                     (([&]() -> Prelude::unit {
-                        uint32_t guid795 = index;
-                        uint32_t guid796 = ((lst).length - 2);
-                        for (uint32_t i = guid795; i <= guid796; i++) {
+                        uint32_t guid906 = index;
+                        uint32_t guid907 = ((lst).length - 2);
+                        for (uint32_t i = guid906; i <= guid907; i++) {
                             (((ret).data)[i] = ((lst).data)[(i + 1)]);
                         }
                         return {};
@@ -941,19 +941,19 @@ namespace List {
             juniper::quit<Prelude::list<t, n>>()
         :
             (([&]() -> Prelude::list<t, n>{
-                Prelude::list<t, n> guid797;
-                guid797.data = (lst).data;
-                guid797.length = ((lst).length - 1);
-                return guid797;
+                Prelude::list<t, n> guid908;
+                guid908.data = (lst).data;
+                guid908.length = ((lst).length - 1);
+                return guid908;
             })()));
     }
 
     template<typename t, int n>
     Prelude::unit foreach(juniper::function<Prelude::unit(t)> f, Prelude::list<t, n> lst) {
         return (([&]() -> Prelude::unit {
-            uint32_t guid798 = 0;
-            uint32_t guid799 = ((lst).length - 1);
-            for (uint32_t i = guid798; i <= guid799; i++) {
+            uint32_t guid909 = 0;
+            uint32_t guid910 = ((lst).length - 1);
+            for (uint32_t i = guid909; i <= guid910; i++) {
                 f(((lst).data)[i]);
             }
             return {};
@@ -971,16 +971,16 @@ namespace List {
             juniper::quit<t>()
         :
             (([&]() -> t {
-                auto guid800 = ((lst).data)[0];
+                auto guid911 = ((lst).data)[0];
                 if (!(true)) {
                     juniper::quit<Prelude::unit>();
                 }
-                t maxVal = guid800;
+                t maxVal = guid911;
                 
                 (([&]() -> Prelude::unit {
-                    uint32_t guid801 = 1;
-                    uint32_t guid802 = ((lst).length - 1);
-                    for (uint32_t i = guid801; i <= guid802; i++) {
+                    uint32_t guid912 = 1;
+                    uint32_t guid913 = ((lst).length - 1);
+                    for (uint32_t i = guid912; i <= guid913; i++) {
                         ((((lst).data)[i] > maxVal) ? 
                             (([&]() -> Prelude::unit {
                                 (maxVal = ((lst).data)[i]);
@@ -1001,16 +1001,16 @@ namespace List {
             juniper::quit<t>()
         :
             (([&]() -> t {
-                auto guid803 = ((lst).data)[0];
+                auto guid914 = ((lst).data)[0];
                 if (!(true)) {
                     juniper::quit<Prelude::unit>();
                 }
-                t minVal = guid803;
+                t minVal = guid914;
                 
                 (([&]() -> Prelude::unit {
-                    uint32_t guid804 = 1;
-                    uint32_t guid805 = ((lst).length - 1);
-                    for (uint32_t i = guid804; i <= guid805; i++) {
+                    uint32_t guid915 = 1;
+                    uint32_t guid916 = ((lst).length - 1);
+                    for (uint32_t i = guid915; i <= guid916; i++) {
                         ((((lst).data)[i] < minVal) ? 
                             (([&]() -> Prelude::unit {
                                 (minVal = ((lst).data)[i]);
@@ -1028,16 +1028,16 @@ namespace List {
     template<typename t, int n>
     bool member(t elem, Prelude::list<t, n> lst) {
         return (([&]() -> bool {
-            auto guid806 = false;
+            auto guid917 = false;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            bool found = guid806;
+            bool found = guid917;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid807 = 0;
-                uint32_t guid808 = ((lst).length - 1);
-                for (uint32_t i = guid807; i <= guid808; i++) {
+                uint32_t guid918 = 0;
+                uint32_t guid919 = ((lst).length - 1);
+                for (uint32_t i = guid918; i <= guid919; i++) {
                     ((!(found) && (((lst).data)[i] == elem)) ? 
                         (([&]() -> Prelude::unit {
                             (found = true);
@@ -1056,21 +1056,21 @@ namespace List {
     Prelude::list<Prelude::tuple2<a,b>, n> zip(Prelude::list<a, n> lstA, Prelude::list<b, n> lstB) {
         return (((lstA).length == (lstB).length) ? 
             (([&]() -> Prelude::list<Prelude::tuple2<a,b>, n> {
-                auto guid809 = (([&]() -> Prelude::list<Prelude::tuple2<a,b>, n>{
-                    Prelude::list<Prelude::tuple2<a,b>, n> guid810;
-                    guid810.data = (juniper::array<Prelude::tuple2<a,b>, n>());
-                    guid810.length = (lstA).length;
-                    return guid810;
+                auto guid920 = (([&]() -> Prelude::list<Prelude::tuple2<a,b>, n>{
+                    Prelude::list<Prelude::tuple2<a,b>, n> guid921;
+                    guid921.data = (juniper::array<Prelude::tuple2<a,b>, n>());
+                    guid921.length = (lstA).length;
+                    return guid921;
                 })());
                 if (!(true)) {
                     juniper::quit<Prelude::unit>();
                 }
-                Prelude::list<Prelude::tuple2<a,b>, n> ret = guid809;
+                Prelude::list<Prelude::tuple2<a,b>, n> ret = guid920;
                 
                 (([&]() -> Prelude::unit {
-                    uint32_t guid811 = 0;
-                    uint32_t guid812 = (lstA).length;
-                    for (uint32_t i = guid811; i <= guid812; i++) {
+                    uint32_t guid922 = 0;
+                    uint32_t guid923 = (lstA).length;
+                    for (uint32_t i = guid922; i <= guid923; i++) {
                         (((ret).data)[i] = (Prelude::tuple2<a,b>{((lstA).data)[i], ((lstB).data)[i]}));
                     }
                     return {};
@@ -1084,39 +1084,39 @@ namespace List {
     template<typename a, typename b, int n>
     Prelude::tuple2<Prelude::list<a, n>,Prelude::list<b, n>> unzip(Prelude::list<Prelude::tuple2<a,b>, n> lst) {
         return (([&]() -> Prelude::tuple2<Prelude::list<a, n>,Prelude::list<a, n>> {
-            auto guid813 = (([&]() -> Prelude::list<a, n>{
-                Prelude::list<a, n> guid814;
-                guid814.data = (juniper::array<a, n>());
-                guid814.length = (lst).length;
-                return guid814;
+            auto guid924 = (([&]() -> Prelude::list<a, n>{
+                Prelude::list<a, n> guid925;
+                guid925.data = (juniper::array<a, n>());
+                guid925.length = (lst).length;
+                return guid925;
             })());
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            Prelude::list<a, n> retA = guid813;
+            Prelude::list<a, n> retA = guid924;
             
-            auto guid815 = (([&]() -> Prelude::list<a, n>{
-                Prelude::list<a, n> guid816;
-                guid816.data = (juniper::array<b, n>());
-                guid816.length = (lst).length;
-                return guid816;
+            auto guid926 = (([&]() -> Prelude::list<a, n>{
+                Prelude::list<a, n> guid927;
+                guid927.data = (juniper::array<b, n>());
+                guid927.length = (lst).length;
+                return guid927;
             })());
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            Prelude::list<a, n> retB = guid815;
+            Prelude::list<a, n> retB = guid926;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid817 = 0;
-                uint32_t guid818 = ((lst).length - 1);
-                for (uint32_t i = guid817; i <= guid818; i++) {
+                uint32_t guid928 = 0;
+                uint32_t guid929 = ((lst).length - 1);
+                for (uint32_t i = guid928; i <= guid929; i++) {
                     (([&]() -> b {
-                        auto guid819 = ((lst).data)[i];
+                        auto guid930 = ((lst).data)[i];
                         if (!(true)) {
                             juniper::quit<Prelude::unit>();
                         }
-                        b elemB = (guid819).e2;
-                        a elemA = (guid819).e1;
+                        b elemB = (guid930).e2;
+                        a elemA = (guid930).e1;
                         
                         (((retA).data)[i] = elemA);
                         return (((retB).data)[i] = elemB);
@@ -1141,10 +1141,10 @@ namespace Signal {
     template<typename a, typename b>
     Prelude::sig<b> map(juniper::function<b(a)> f, Prelude::sig<a> s) {
         return (([&]() -> Prelude::sig<b> {
-            Prelude::sig<a> guid820 = s;
-            return ((((guid820).tag == 0) && ((((guid820).signal).tag == 0) && true)) ? 
+            Prelude::sig<a> guid931 = s;
+            return ((((guid931).tag == 0) && ((((guid931).signal).tag == 0) && true)) ? 
                 (([&]() -> Prelude::sig<b> {
-                    auto val = ((guid820).signal).just;
+                    auto val = ((guid931).signal).just;
                     return signal<b>(just<b>(f(val)));
                 })())
             :
@@ -1160,10 +1160,10 @@ namespace Signal {
     template<typename a>
     Prelude::unit sink(juniper::function<Prelude::unit(a)> f, Prelude::sig<a> s) {
         return (([&]() -> Prelude::unit {
-            Prelude::sig<a> guid821 = s;
-            return ((((guid821).tag == 0) && ((((guid821).signal).tag == 0) && true)) ? 
+            Prelude::sig<a> guid932 = s;
+            return ((((guid932).tag == 0) && ((((guid932).signal).tag == 0) && true)) ? 
                 (([&]() -> Prelude::unit {
-                    auto val = ((guid821).signal).just;
+                    auto val = ((guid932).signal).just;
                     return f(val);
                 })())
             :
@@ -1179,10 +1179,10 @@ namespace Signal {
     template<typename a>
     Prelude::sig<a> filter(juniper::function<bool(a)> f, Prelude::sig<a> s) {
         return (([&]() -> Prelude::sig<a> {
-            Prelude::sig<a> guid822 = s;
-            return ((((guid822).tag == 0) && ((((guid822).signal).tag == 0) && true)) ? 
+            Prelude::sig<a> guid933 = s;
+            return ((((guid933).tag == 0) && ((((guid933).signal).tag == 0) && true)) ? 
                 (([&]() -> Prelude::sig<a> {
-                    auto val = ((guid822).signal).just;
+                    auto val = ((guid933).signal).just;
                     return (f(val) ? 
                         signal<a>(nothing<a>())
                     :
@@ -1201,8 +1201,8 @@ namespace Signal {
     template<typename a>
     Prelude::sig<a> merge(Prelude::sig<a> sigA, Prelude::sig<a> sigB) {
         return (([&]() -> Prelude::sig<a> {
-            Prelude::sig<a> guid823 = sigA;
-            return ((((guid823).tag == 0) && ((((guid823).signal).tag == 0) && true)) ? 
+            Prelude::sig<a> guid934 = sigA;
+            return ((((guid934).tag == 0) && ((((guid934).signal).tag == 0) && true)) ? 
                 (([&]() -> Prelude::sig<a> {
                     return sigA;
                 })())
@@ -1219,26 +1219,26 @@ namespace Signal {
     template<typename a, int n>
     Prelude::sig<a> mergeMany(Prelude::list<Prelude::sig<a>, n> sigs) {
         return (([&]() -> Prelude::sig<a> {
-            auto guid824 = nothing<a>();
+            auto guid935 = nothing<a>();
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            Prelude::maybe<a> ret = guid824;
+            Prelude::maybe<a> ret = guid935;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid825 = 0;
-                uint32_t guid826 = (n - 1);
-                for (uint32_t i = guid825; i <= guid826; i++) {
+                uint32_t guid936 = 0;
+                uint32_t guid937 = (n - 1);
+                for (uint32_t i = guid936; i <= guid937; i++) {
                     (([&]() -> Prelude::unit {
-                        Prelude::maybe<a> guid827 = ret;
-                        return ((((guid827).tag == 1) && true) ? 
+                        Prelude::maybe<a> guid938 = ret;
+                        return ((((guid938).tag == 1) && true) ? 
                             (([&]() -> Prelude::unit {
                                 return (([&]() -> Prelude::unit {
-                                    auto guid828 = List::nth<a, n>(i, sigs);
-                                    if (!((((guid828).tag == 0) && true))) {
+                                    auto guid939 = List::nth<a, n>(i, sigs);
+                                    if (!((((guid939).tag == 0) && true))) {
                                         juniper::quit<Prelude::unit>();
                                     }
-                                    auto heldValue = (guid828).signal;
+                                    auto heldValue = (guid939).signal;
                                     
                                     (ret = heldValue);
                                     return Prelude::unit();
@@ -1262,16 +1262,16 @@ namespace Signal {
     template<typename a, typename b>
     Prelude::sig<Prelude::either<a, b>> join(Prelude::sig<a> sigA, Prelude::sig<b> sigB) {
         return (([&]() -> Prelude::sig<Prelude::either<a, b>> {
-            Prelude::tuple2<Prelude::sig<a>,Prelude::sig<b>> guid829 = (Prelude::tuple2<Prelude::sig<a>,Prelude::sig<b>>{sigA, sigB});
-            return (((((guid829).e1).tag == 0) && (((((guid829).e1).signal).tag == 0) && true)) ? 
+            Prelude::tuple2<Prelude::sig<a>,Prelude::sig<b>> guid940 = (Prelude::tuple2<Prelude::sig<a>,Prelude::sig<b>>{sigA, sigB});
+            return (((((guid940).e1).tag == 0) && (((((guid940).e1).signal).tag == 0) && true)) ? 
                 (([&]() -> Prelude::sig<Prelude::either<a, b>> {
-                    auto value = (((guid829).e1).signal).just;
+                    auto value = (((guid940).e1).signal).just;
                     return signal<Prelude::either<a, b>>(just<Prelude::either<a, b>>(left<a, b>(value)));
                 })())
             :
-                (((((guid829).e2).tag == 0) && (((((guid829).e2).signal).tag == 0) && true)) ? 
+                (((((guid940).e2).tag == 0) && (((((guid940).e2).signal).tag == 0) && true)) ? 
                     (([&]() -> Prelude::sig<Prelude::either<a, b>> {
-                        auto value = (((guid829).e2).signal).just;
+                        auto value = (((guid940).e2).signal).just;
                         return signal<Prelude::either<a, b>>(just<Prelude::either<a, b>>(right<a, b>(value)));
                     })())
                 :
@@ -1294,16 +1294,16 @@ namespace Signal {
     template<typename a, typename state>
     Prelude::sig<state> foldP(juniper::function<state(a,state)> f, juniper::shared_ptr<state> state0, Prelude::sig<a> incoming) {
         return (([&]() -> Prelude::sig<state> {
-            Prelude::sig<a> guid830 = incoming;
-            return ((((guid830).tag == 0) && ((((guid830).signal).tag == 0) && true)) ? 
+            Prelude::sig<a> guid941 = incoming;
+            return ((((guid941).tag == 0) && ((((guid941).signal).tag == 0) && true)) ? 
                 (([&]() -> Prelude::sig<state> {
-                    auto val = ((guid830).signal).just;
+                    auto val = ((guid941).signal).just;
                     return (([&]() -> Prelude::sig<state> {
-                        auto guid831 = f(val, (*((state0).get())));
+                        auto guid942 = f(val, (*((state0).get())));
                         if (!(true)) {
                             juniper::quit<Prelude::unit>();
                         }
-                        state state1 = guid831;
+                        state state1 = guid942;
                         
                         (*((state*) (state0.get())) = state1);
                         return signal<state>(just<state>(state1));
@@ -1323,16 +1323,16 @@ namespace Signal {
     Prelude::sig<a> dropRepeats(Prelude::sig<a> incoming, juniper::shared_ptr<Prelude::maybe<a>> maybePrevValue) {
         return filter<a>(juniper::function<bool(a)>([=](a value) mutable -> bool { 
             return (([&]() -> bool {
-                auto guid832 = (([&]() -> bool {
-                    Prelude::maybe<a> guid833 = (*((maybePrevValue).get()));
-                    return ((((guid833).tag == 1) && true) ? 
+                auto guid943 = (([&]() -> bool {
+                    Prelude::maybe<a> guid944 = (*((maybePrevValue).get()));
+                    return ((((guid944).tag == 1) && true) ? 
                         (([&]() -> bool {
                             return false;
                         })())
                     :
-                        ((((guid833).tag == 0) && true) ? 
+                        ((((guid944).tag == 0) && true) ? 
                             (([&]() -> bool {
-                                auto prevValue = (guid833).just;
+                                auto prevValue = (guid944).just;
                                 return (value == prevValue);
                             })())
                         :
@@ -1341,7 +1341,7 @@ namespace Signal {
                 if (!(true)) {
                     juniper::quit<Prelude::unit>();
                 }
-                bool filtered = guid832;
+                bool filtered = guid943;
                 
                 (!(filtered) ? 
                     (([&]() -> Prelude::unit {
@@ -1358,10 +1358,10 @@ namespace Signal {
     template<typename a>
     Prelude::sig<a> latch(Prelude::sig<a> incoming, juniper::shared_ptr<a> prevValue) {
         return (([&]() -> Prelude::sig<a> {
-            Prelude::sig<a> guid834 = incoming;
-            return ((((guid834).tag == 0) && ((((guid834).signal).tag == 0) && true)) ? 
+            Prelude::sig<a> guid945 = incoming;
+            return ((((guid945).tag == 0) && ((((guid945).signal).tag == 0) && true)) ? 
                 (([&]() -> Prelude::sig<a> {
-                    auto val = ((guid834).signal).just;
+                    auto val = ((guid945).signal).just;
                     return (([&]() -> Prelude::sig<a> {
                         (*((a*) (prevValue.get())) = val);
                         return incoming;
@@ -1380,12 +1380,12 @@ namespace Signal {
     template<typename a, typename b, typename c>
     Prelude::sig<c> map2(juniper::function<c(a,b)> f, Prelude::sig<a> incomingA, Prelude::sig<b> incomingB, juniper::shared_ptr<Prelude::tuple2<a,b>> state) {
         return (([&]() -> Prelude::sig<c> {
-            auto guid835 = (([&]() -> a {
-                Prelude::sig<a> guid836 = incomingA;
-                return ((((guid836).tag == 0) && ((((guid836).signal).tag == 0) && true)) ? 
+            auto guid946 = (([&]() -> a {
+                Prelude::sig<a> guid947 = incomingA;
+                return ((((guid947).tag == 0) && ((((guid947).signal).tag == 0) && true)) ? 
                     (([&]() -> a {
-                        auto val = ((guid836).signal).just;
-                        return val;
+                        auto val1 = ((guid947).signal).just;
+                        return val1;
                     })())
                 :
                     (true ? 
@@ -1398,32 +1398,32 @@ namespace Signal {
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            a valA = guid835;
+            a valA = guid946;
             
-            auto guid837 = (([&]() -> a {
-                Prelude::sig<b> guid838 = incomingB;
-                return ((((guid838).tag == 0) && ((((guid838).signal).tag == 0) && true)) ? 
-                    (([&]() -> a {
-                        auto val = ((guid838).signal).just;
-                        return val;
+            auto guid948 = (([&]() -> b {
+                Prelude::sig<b> guid949 = incomingB;
+                return ((((guid949).tag == 0) && ((((guid949).signal).tag == 0) && true)) ? 
+                    (([&]() -> b {
+                        auto val2 = ((guid949).signal).just;
+                        return val2;
                     })())
                 :
                     (true ? 
-                        (([&]() -> a {
+                        (([&]() -> b {
                             return snd<a, b>((*((state).get())));
                         })())
                     :
-                        juniper::quit<a>()));
+                        juniper::quit<b>()));
             })());
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            a valB = guid837;
+            b valB = guid948;
             
-            (*((Prelude::tuple2<a,a>*) (state.get())) = (Prelude::tuple2<a,a>{valA, valB}));
+            (*((Prelude::tuple2<a,b>*) (state.get())) = (Prelude::tuple2<a,b>{valA, valB}));
             return (([&]() -> Prelude::sig<c> {
-                Prelude::tuple2<Prelude::sig<a>,Prelude::sig<b>> guid839 = (Prelude::tuple2<Prelude::sig<a>,Prelude::sig<b>>{incomingA, incomingB});
-                return (((((guid839).e2).tag == 0) && (((((guid839).e2).signal).tag == 1) && ((((guid839).e1).tag == 0) && (((((guid839).e1).signal).tag == 1) && true)))) ? 
+                Prelude::tuple2<Prelude::sig<a>,Prelude::sig<b>> guid950 = (Prelude::tuple2<Prelude::sig<a>,Prelude::sig<b>>{incomingA, incomingB});
+                return (((((guid950).e2).tag == 0) && (((((guid950).e2).signal).tag == 1) && ((((guid950).e1).tag == 0) && (((((guid950).e1).signal).tag == 1) && true)))) ? 
                     (([&]() -> Prelude::sig<c> {
                         return signal<c>(nothing<c>());
                     })())
@@ -1525,13 +1525,13 @@ namespace Io {
 
     Io::pinState toggle(Io::pinState p) {
         return (([&]() -> Io::pinState {
-            Io::pinState guid840 = p;
-            return ((((guid840).tag == 0) && true) ? 
+            Io::pinState guid951 = p;
+            return ((((guid951).tag == 0) && true) ? 
                 (([&]() -> Io::pinState {
                     return low();
                 })())
             :
-                ((((guid840).tag == 1) && true) ? 
+                ((((guid951).tag == 1) && true) ? 
                     (([&]() -> Io::pinState {
                         return high();
                     })())
@@ -1564,13 +1564,13 @@ namespace Io {
 
     uint8_t pinStateToInt(Io::pinState value) {
         return (([&]() -> int32_t {
-            Io::pinState guid841 = value;
-            return ((((guid841).tag == 1) && true) ? 
+            Io::pinState guid952 = value;
+            return ((((guid952).tag == 1) && true) ? 
                 (([&]() -> int32_t {
                     return 0;
                 })())
             :
-                ((((guid841).tag == 0) && true) ? 
+                ((((guid952).tag == 0) && true) ? 
                     (([&]() -> int32_t {
                         return 1;
                     })())
@@ -1588,11 +1588,11 @@ namespace Io {
 
     Prelude::unit digWrite(uint16_t pin, Io::pinState value) {
         return (([&]() -> Prelude::unit {
-            auto guid842 = pinStateToInt(value);
+            auto guid953 = pinStateToInt(value);
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint8_t intVal = guid842;
+            uint8_t intVal = guid953;
             
             return (([&]() -> Prelude::unit {
                 digitalWrite(pin, intVal);
@@ -1603,11 +1603,11 @@ namespace Io {
 
     Io::pinState digRead(uint16_t pin) {
         return (([&]() -> Io::pinState {
-            auto guid843 = 0;
+            auto guid954 = 0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint8_t intVal = guid843;
+            uint8_t intVal = guid954;
             
             (([&]() -> Prelude::unit {
                 intVal = digitalRead(pin);
@@ -1629,11 +1629,11 @@ namespace Io {
 
     uint16_t anaRead(uint16_t pin) {
         return (([&]() -> uint16_t {
-            auto guid844 = 0;
+            auto guid955 = 0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint16_t value = guid844;
+            uint16_t value = guid955;
             
             (([&]() -> Prelude::unit {
                 value = analogRead(pin);
@@ -1662,18 +1662,18 @@ namespace Io {
 
     uint8_t pinModeToInt(Io::mode m) {
         return (([&]() -> int32_t {
-            Io::mode guid845 = m;
-            return ((((guid845).tag == 0) && true) ? 
+            Io::mode guid956 = m;
+            return ((((guid956).tag == 0) && true) ? 
                 (([&]() -> int32_t {
                     return 0;
                 })())
             :
-                ((((guid845).tag == 1) && true) ? 
+                ((((guid956).tag == 1) && true) ? 
                     (([&]() -> int32_t {
                         return 1;
                     })())
                 :
-                    ((((guid845).tag == 2) && true) ? 
+                    ((((guid956).tag == 2) && true) ? 
                         (([&]() -> int32_t {
                             return 2;
                         })())
@@ -1684,18 +1684,18 @@ namespace Io {
 
     Io::mode intToPinMode(uint8_t m) {
         return (([&]() -> Io::mode {
-            uint8_t guid846 = m;
-            return (((guid846 == 0) && true) ? 
+            uint8_t guid957 = m;
+            return (((guid957 == 0) && true) ? 
                 (([&]() -> Io::mode {
                     return input();
                 })())
             :
-                (((guid846 == 1) && true) ? 
+                (((guid957 == 1) && true) ? 
                     (([&]() -> Io::mode {
                         return output();
                     })())
                 :
-                    (((guid846 == 2) && true) ? 
+                    (((guid957 == 2) && true) ? 
                         (([&]() -> Io::mode {
                             return inputPullup();
                         })())
@@ -1706,11 +1706,11 @@ namespace Io {
 
     Prelude::unit setPinMode(uint16_t pin, Io::mode m) {
         return (([&]() -> Prelude::unit {
-            auto guid847 = pinModeToInt(m);
+            auto guid958 = pinModeToInt(m);
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint8_t m2 = guid847;
+            uint8_t m2 = guid958;
             
             return (([&]() -> Prelude::unit {
                 pinMode(pin, m2);
@@ -1722,9 +1722,9 @@ namespace Io {
     Prelude::sig<Prelude::unit> risingEdge(Prelude::sig<Io::pinState> sig, juniper::shared_ptr<Io::pinState> prevState) {
         return Signal::toUnit<Io::pinState>(Signal::filter<Io::pinState>(juniper::function<bool(Io::pinState)>([=](Io::pinState currState) mutable -> bool { 
             return (([&]() -> bool {
-                auto guid848 = (([&]() -> bool {
-                    Prelude::tuple2<Io::pinState,Io::pinState> guid849 = (Prelude::tuple2<Io::pinState,Io::pinState>{currState, (*((prevState).get()))});
-                    return (((((guid849).e2).tag == 1) && ((((guid849).e1).tag == 0) && true)) ? 
+                auto guid959 = (([&]() -> bool {
+                    Prelude::tuple2<Io::pinState,Io::pinState> guid960 = (Prelude::tuple2<Io::pinState,Io::pinState>{currState, (*((prevState).get()))});
+                    return (((((guid960).e2).tag == 1) && ((((guid960).e1).tag == 0) && true)) ? 
                         (([&]() -> bool {
                             return false;
                         })())
@@ -1739,7 +1739,7 @@ namespace Io {
                 if (!(true)) {
                     juniper::quit<Prelude::unit>();
                 }
-                bool ret = guid848;
+                bool ret = guid959;
                 
                 (*((Io::pinState*) (prevState.get())) = currState);
                 return ret;
@@ -1750,9 +1750,9 @@ namespace Io {
     Prelude::sig<Prelude::unit> fallingEdge(Prelude::sig<Io::pinState> sig, juniper::shared_ptr<Io::pinState> prevState) {
         return Signal::toUnit<Io::pinState>(Signal::filter<Io::pinState>(juniper::function<bool(Io::pinState)>([=](Io::pinState currState) mutable -> bool { 
             return (([&]() -> bool {
-                auto guid850 = (([&]() -> bool {
-                    Prelude::tuple2<Io::pinState,Io::pinState> guid851 = (Prelude::tuple2<Io::pinState,Io::pinState>{currState, (*((prevState).get()))});
-                    return (((((guid851).e2).tag == 0) && ((((guid851).e1).tag == 1) && true)) ? 
+                auto guid961 = (([&]() -> bool {
+                    Prelude::tuple2<Io::pinState,Io::pinState> guid962 = (Prelude::tuple2<Io::pinState,Io::pinState>{currState, (*((prevState).get()))});
+                    return (((((guid962).e2).tag == 0) && ((((guid962).e1).tag == 1) && true)) ? 
                         (([&]() -> bool {
                             return false;
                         })())
@@ -1767,7 +1767,7 @@ namespace Io {
                 if (!(true)) {
                     juniper::quit<Prelude::unit>();
                 }
-                bool ret = guid850;
+                bool ret = guid961;
                 
                 (*((Io::pinState*) (prevState.get())) = currState);
                 return ret;
@@ -1778,14 +1778,14 @@ namespace Io {
     Prelude::sig<Io::pinState> edge(Prelude::sig<Io::pinState> sig, juniper::shared_ptr<Io::pinState> prevState) {
         return Signal::filter<Io::pinState>(juniper::function<bool(Io::pinState)>([=](Io::pinState currState) mutable -> bool { 
             return (([&]() -> bool {
-                auto guid852 = (([&]() -> bool {
-                    Prelude::tuple2<Io::pinState,Io::pinState> guid853 = (Prelude::tuple2<Io::pinState,Io::pinState>{currState, (*((prevState).get()))});
-                    return (((((guid853).e2).tag == 1) && ((((guid853).e1).tag == 0) && true)) ? 
+                auto guid963 = (([&]() -> bool {
+                    Prelude::tuple2<Io::pinState,Io::pinState> guid964 = (Prelude::tuple2<Io::pinState,Io::pinState>{currState, (*((prevState).get()))});
+                    return (((((guid964).e2).tag == 1) && ((((guid964).e1).tag == 0) && true)) ? 
                         (([&]() -> bool {
                             return false;
                         })())
                     :
-                        (((((guid853).e2).tag == 0) && ((((guid853).e1).tag == 1) && true)) ? 
+                        (((((guid964).e2).tag == 0) && ((((guid964).e1).tag == 1) && true)) ? 
                             (([&]() -> bool {
                                 return false;
                             })())
@@ -1800,7 +1800,7 @@ namespace Io {
                 if (!(true)) {
                     juniper::quit<Prelude::unit>();
                 }
-                bool ret = guid852;
+                bool ret = guid963;
                 
                 (*((Io::pinState*) (prevState.get())) = currState);
                 return ret;
@@ -1821,10 +1821,10 @@ namespace Maybe {
     template<typename a, typename b>
     Prelude::maybe<b> map(juniper::function<b(a)> f, Prelude::maybe<a> maybeVal) {
         return (([&]() -> Prelude::maybe<b> {
-            Prelude::maybe<a> guid854 = maybeVal;
-            return ((((guid854).tag == 0) && true) ? 
+            Prelude::maybe<a> guid965 = maybeVal;
+            return ((((guid965).tag == 0) && true) ? 
                 (([&]() -> Prelude::maybe<b> {
-                    auto val = (guid854).just;
+                    auto val = (guid965).just;
                     return just<b>(f(val));
                 })())
             :
@@ -1840,10 +1840,10 @@ namespace Maybe {
     template<typename a>
     a get(Prelude::maybe<a> maybeVal) {
         return (([&]() -> a {
-            Prelude::maybe<a> guid855 = maybeVal;
-            return ((((guid855).tag == 0) && true) ? 
+            Prelude::maybe<a> guid966 = maybeVal;
+            return ((((guid966).tag == 0) && true) ? 
                 (([&]() -> a {
-                    auto val = (guid855).just;
+                    auto val = (guid966).just;
                     return val;
                 })())
             :
@@ -1854,8 +1854,8 @@ namespace Maybe {
     template<typename a>
     bool isJust(Prelude::maybe<a> maybeVal) {
         return (([&]() -> bool {
-            Prelude::maybe<a> guid856 = maybeVal;
-            return ((((guid856).tag == 0) && true) ? 
+            Prelude::maybe<a> guid967 = maybeVal;
+            return ((((guid967).tag == 0) && true) ? 
                 (([&]() -> bool {
                     return true;
                 })())
@@ -1877,8 +1877,8 @@ namespace Maybe {
     template<typename a>
     uint8_t count(Prelude::maybe<a> maybeVal) {
         return (([&]() -> int32_t {
-            Prelude::maybe<a> guid857 = maybeVal;
-            return ((((guid857).tag == 0) && true) ? 
+            Prelude::maybe<a> guid968 = maybeVal;
+            return ((((guid968).tag == 0) && true) ? 
                 (([&]() -> int32_t {
                     return 1;
                 })())
@@ -1895,10 +1895,10 @@ namespace Maybe {
     template<typename t, typename state>
     state foldl(juniper::function<state(t,state)> f, state initState, Prelude::maybe<t> maybeVal) {
         return (([&]() -> state {
-            Prelude::maybe<t> guid858 = maybeVal;
-            return ((((guid858).tag == 0) && true) ? 
+            Prelude::maybe<t> guid969 = maybeVal;
+            return ((((guid969).tag == 0) && true) ? 
                 (([&]() -> state {
-                    auto val = (guid858).just;
+                    auto val = (guid969).just;
                     return f(val, initState);
                 })())
             :
@@ -1919,16 +1919,16 @@ namespace Maybe {
     template<typename a>
     Prelude::unit iter(juniper::function<Prelude::unit(a)> f, Prelude::maybe<a> maybeVal) {
         return (([&]() -> Prelude::unit {
-            Prelude::maybe<a> guid859 = maybeVal;
-            return ((((guid859).tag == 0) && true) ? 
+            Prelude::maybe<a> guid970 = maybeVal;
+            return ((((guid970).tag == 0) && true) ? 
                 (([&]() -> Prelude::unit {
-                    auto val = (guid859).just;
+                    auto val = (guid970).just;
                     return f(val);
                 })())
             :
                 (true ? 
                     (([&]() -> Prelude::unit {
-                        Prelude::maybe<a> nothing = guid859;
+                        Prelude::maybe<a> nothing = guid970;
                         return Prelude::unit();
                     })())
                 :
@@ -1955,11 +1955,11 @@ namespace Time {
 
     uint32_t now() {
         return (([&]() -> uint32_t {
-            auto guid860 = 0;
+            auto guid971 = 0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint32_t ret = guid860;
+            uint32_t ret = guid971;
             
             (([&]() -> Prelude::unit {
                 ret = millis();
@@ -1982,37 +1982,37 @@ namespace Time {
 
     juniper::shared_ptr<Time::timerState> state() {
         return (juniper::shared_ptr<Time::timerState>(new Time::timerState((([&]() -> Time::timerState{
-            Time::timerState guid861;
-            guid861.lastPulse = 0;
-            return guid861;
+            Time::timerState guid972;
+            guid972.lastPulse = 0;
+            return guid972;
         })()))));
     }
 
     Prelude::sig<uint32_t> every(uint32_t interval, juniper::shared_ptr<Time::timerState> state) {
         return (([&]() -> Prelude::sig<uint32_t> {
-            auto guid862 = now();
+            auto guid973 = now();
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint32_t t = guid862;
+            uint32_t t = guid973;
             
-            auto guid863 = ((interval == 0) ? 
+            auto guid974 = ((interval == 0) ? 
                 t
             :
                 ((t / interval) * interval));
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint32_t lastWindow = guid863;
+            uint32_t lastWindow = guid974;
             
             return ((((*((state).get()))).lastPulse >= lastWindow) ? 
                 signal<uint32_t>(nothing<uint32_t>())
             :
                 (([&]() -> Prelude::sig<uint32_t> {
                     (*((Time::timerState*) (state.get())) = (([&]() -> Time::timerState{
-                        Time::timerState guid864;
-                        guid864.lastPulse = t;
-                        return guid864;
+                        Time::timerState guid975;
+                        guid975.lastPulse = t;
+                        return guid975;
                     })()));
                     return signal<uint32_t>(just<uint32_t>(t));
                 })()));
@@ -2043,11 +2043,11 @@ namespace Math {
 
     double acos_(double x) {
         return (([&]() -> double {
-            auto guid865 = 0.0;
+            auto guid976 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid865;
+            double ret = guid976;
             
             (([&]() -> Prelude::unit {
                 ret = acos(x);
@@ -2059,11 +2059,11 @@ namespace Math {
 
     double asin_(double x) {
         return (([&]() -> double {
-            auto guid866 = 0.0;
+            auto guid977 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid866;
+            double ret = guid977;
             
             (([&]() -> Prelude::unit {
                 ret = asin(x);
@@ -2075,11 +2075,11 @@ namespace Math {
 
     double atan_(double x) {
         return (([&]() -> double {
-            auto guid867 = 0.0;
+            auto guid978 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid867;
+            double ret = guid978;
             
             (([&]() -> Prelude::unit {
                 ret = atan(x);
@@ -2091,11 +2091,11 @@ namespace Math {
 
     double atan2_(double y, double x) {
         return (([&]() -> double {
-            auto guid868 = 0.0;
+            auto guid979 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid868;
+            double ret = guid979;
             
             (([&]() -> Prelude::unit {
                 ret = atan2(y, x);
@@ -2107,11 +2107,11 @@ namespace Math {
 
     double cos_(double x) {
         return (([&]() -> double {
-            auto guid869 = 0.0;
+            auto guid980 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid869;
+            double ret = guid980;
             
             (([&]() -> Prelude::unit {
                 ret = cos(x);
@@ -2123,11 +2123,11 @@ namespace Math {
 
     double cosh_(double x) {
         return (([&]() -> double {
-            auto guid870 = 0.0;
+            auto guid981 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid870;
+            double ret = guid981;
             
             (([&]() -> Prelude::unit {
                 ret = cosh(x);
@@ -2139,11 +2139,11 @@ namespace Math {
 
     double sin_(double x) {
         return (([&]() -> double {
-            auto guid871 = 0.0;
+            auto guid982 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid871;
+            double ret = guid982;
             
             (([&]() -> Prelude::unit {
                 ret = sin(x);
@@ -2155,11 +2155,11 @@ namespace Math {
 
     double sinh_(double x) {
         return (([&]() -> double {
-            auto guid872 = 0.0;
+            auto guid983 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid872;
+            double ret = guid983;
             
             (([&]() -> Prelude::unit {
                 ret = sinh(x);
@@ -2175,11 +2175,11 @@ namespace Math {
 
     double tanh_(double x) {
         return (([&]() -> double {
-            auto guid873 = 0.0;
+            auto guid984 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid873;
+            double ret = guid984;
             
             (([&]() -> Prelude::unit {
                 ret = tanh(x);
@@ -2191,11 +2191,11 @@ namespace Math {
 
     double exp_(double x) {
         return (([&]() -> double {
-            auto guid874 = 0.0;
+            auto guid985 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid874;
+            double ret = guid985;
             
             (([&]() -> Prelude::unit {
                 ret = exp(x);
@@ -2207,17 +2207,17 @@ namespace Math {
 
     Prelude::tuple2<double,int16_t> frexp_(double x) {
         return (([&]() -> Prelude::tuple2<double,int16_t> {
-            auto guid875 = 0.0;
+            auto guid986 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid875;
+            double ret = guid986;
             
-            auto guid876 = 0;
+            auto guid987 = 0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            int16_t exponent = guid876;
+            int16_t exponent = guid987;
             
             (([&]() -> Prelude::unit {
                 ret = frexp(x, &exponent);
@@ -2229,11 +2229,11 @@ namespace Math {
 
     double ldexp_(double x, int16_t exponent) {
         return (([&]() -> double {
-            auto guid877 = 0.0;
+            auto guid988 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid877;
+            double ret = guid988;
             
             (([&]() -> Prelude::unit {
                 ret = ldexp(x, exponent);
@@ -2245,11 +2245,11 @@ namespace Math {
 
     double log_(double x) {
         return (([&]() -> double {
-            auto guid878 = 0.0;
+            auto guid989 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid878;
+            double ret = guid989;
             
             (([&]() -> Prelude::unit {
                 ret = log(x);
@@ -2261,11 +2261,11 @@ namespace Math {
 
     double log10_(double x) {
         return (([&]() -> double {
-            auto guid879 = 0.0;
+            auto guid990 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid879;
+            double ret = guid990;
             
             (([&]() -> Prelude::unit {
                 ret = log10(x);
@@ -2277,17 +2277,17 @@ namespace Math {
 
     Prelude::tuple2<double,double> modf_(double x) {
         return (([&]() -> Prelude::tuple2<double,double> {
-            auto guid880 = 0.0;
+            auto guid991 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid880;
+            double ret = guid991;
             
-            auto guid881 = 0.0;
+            auto guid992 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double integer = guid881;
+            double integer = guid992;
             
             (([&]() -> Prelude::unit {
                 ret = modf(x, &integer);
@@ -2299,11 +2299,11 @@ namespace Math {
 
     double pow_(double x, double y) {
         return (([&]() -> double {
-            auto guid882 = 0.0;
+            auto guid993 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid882;
+            double ret = guid993;
             
             (([&]() -> Prelude::unit {
                 ret = pow(x, y);
@@ -2315,11 +2315,11 @@ namespace Math {
 
     double sqrt_(double x) {
         return (([&]() -> double {
-            auto guid883 = 0.0;
+            auto guid994 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid883;
+            double ret = guid994;
             
             (([&]() -> Prelude::unit {
                 ret = sqrt(x);
@@ -2331,11 +2331,11 @@ namespace Math {
 
     double ceil_(double x) {
         return (([&]() -> double {
-            auto guid884 = 0.0;
+            auto guid995 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid884;
+            double ret = guid995;
             
             (([&]() -> Prelude::unit {
                 ret = ceil(x);
@@ -2347,11 +2347,11 @@ namespace Math {
 
     double fabs_(double x) {
         return (([&]() -> double {
-            auto guid885 = 0.0;
+            auto guid996 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid885;
+            double ret = guid996;
             
             (([&]() -> Prelude::unit {
                 ret = fabs(x);
@@ -2363,11 +2363,11 @@ namespace Math {
 
     double floor_(double x) {
         return (([&]() -> double {
-            auto guid886 = 0.0;
+            auto guid997 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid886;
+            double ret = guid997;
             
             (([&]() -> Prelude::unit {
                 ret = floor(x);
@@ -2379,11 +2379,11 @@ namespace Math {
 
     double fmod_(double x, double y) {
         return (([&]() -> double {
-            auto guid887 = 0.0;
+            auto guid998 = 0.0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double ret = guid887;
+            double ret = guid998;
             
             (([&]() -> Prelude::unit {
                 ret = fmod(x, y);
@@ -2463,33 +2463,33 @@ namespace Button {
 
     juniper::shared_ptr<Button::buttonState> state() {
         return (juniper::shared_ptr<Button::buttonState>(new Button::buttonState((([&]() -> Button::buttonState{
-            Button::buttonState guid888;
-            guid888.actualState = Io::low();
-            guid888.lastState = Io::low();
-            guid888.lastDebounceTime = 0;
-            return guid888;
+            Button::buttonState guid999;
+            guid999.actualState = Io::low();
+            guid999.lastState = Io::low();
+            guid999.lastDebounceTime = 0;
+            return guid999;
         })()))));
     }
 
     Prelude::sig<Io::pinState> debounceDelay(Prelude::sig<Io::pinState> incoming, uint16_t delay, juniper::shared_ptr<Button::buttonState> buttonState) {
         return Signal::map<Io::pinState, Io::pinState>(juniper::function<Io::pinState(Io::pinState)>([=](Io::pinState currentState) mutable -> Io::pinState { 
             return (([&]() -> Io::pinState {
-                auto guid889 = (*((buttonState).get()));
+                auto guid1000 = (*((buttonState).get()));
                 if (!(true)) {
                     juniper::quit<Prelude::unit>();
                 }
-                uint32_t lastDebounceTime = (guid889).lastDebounceTime;
-                Io::pinState lastState = (guid889).lastState;
-                Io::pinState actualState = (guid889).actualState;
+                uint32_t lastDebounceTime = (guid1000).lastDebounceTime;
+                Io::pinState lastState = (guid1000).lastState;
+                Io::pinState actualState = (guid1000).actualState;
                 
                 return ((currentState != lastState) ? 
                     (([&]() -> Io::pinState {
                         (*((Button::buttonState*) (buttonState.get())) = (([&]() -> Button::buttonState{
-                            Button::buttonState guid890;
-                            guid890.actualState = actualState;
-                            guid890.lastState = currentState;
-                            guid890.lastDebounceTime = Time::now();
-                            return guid890;
+                            Button::buttonState guid1001;
+                            guid1001.actualState = actualState;
+                            guid1001.lastState = currentState;
+                            guid1001.lastDebounceTime = Time::now();
+                            return guid1001;
                         })()));
                         return actualState;
                     })())
@@ -2497,22 +2497,22 @@ namespace Button {
                     (((currentState != actualState) && ((Time::now() - ((*((buttonState).get()))).lastDebounceTime) > delay)) ? 
                         (([&]() -> Io::pinState {
                             (*((Button::buttonState*) (buttonState.get())) = (([&]() -> Button::buttonState{
-                                Button::buttonState guid891;
-                                guid891.actualState = currentState;
-                                guid891.lastState = currentState;
-                                guid891.lastDebounceTime = lastDebounceTime;
-                                return guid891;
+                                Button::buttonState guid1002;
+                                guid1002.actualState = currentState;
+                                guid1002.lastState = currentState;
+                                guid1002.lastDebounceTime = lastDebounceTime;
+                                return guid1002;
                             })()));
                             return currentState;
                         })())
                     :
                         (([&]() -> Io::pinState {
                             (*((Button::buttonState*) (buttonState.get())) = (([&]() -> Button::buttonState{
-                                Button::buttonState guid892;
-                                guid892.actualState = actualState;
-                                guid892.lastState = currentState;
-                                guid892.lastDebounceTime = lastDebounceTime;
-                                return guid892;
+                                Button::buttonState guid1003;
+                                guid1003.actualState = actualState;
+                                guid1003.lastState = currentState;
+                                guid1003.lastDebounceTime = lastDebounceTime;
+                                return guid1003;
                             })()));
                             return actualState;
                         })())));
@@ -2557,9 +2557,9 @@ namespace Vector {
     template<typename a, int n>
     Vector::vector<a, n> make(juniper::array<a,n> d) {
         return (([&]() -> Vector::vector<a, n>{
-            Vector::vector<a, n> guid893;
-            guid893.data = d;
-            return guid893;
+            Vector::vector<a, n> guid1004;
+            guid1004.data = d;
+            return guid1004;
         })());
     }
 
@@ -2571,16 +2571,16 @@ namespace Vector {
     template<typename a, int n>
     Vector::vector<a, n> add(Vector::vector<a, n> v1, Vector::vector<a, n> v2) {
         return (([&]() -> Vector::vector<a, n> {
-            auto guid894 = v1;
+            auto guid1005 = v1;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            Vector::vector<a, n> result = guid894;
+            Vector::vector<a, n> result = guid1005;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid895 = 0;
-                uint32_t guid896 = (n - 1);
-                for (uint32_t i = guid895; i <= guid896; i++) {
+                uint32_t guid1006 = 0;
+                uint32_t guid1007 = (n - 1);
+                for (uint32_t i = guid1006; i <= guid1007; i++) {
                     (((result).data)[i] = (((result).data)[i] + ((v2).data)[i]));
                 }
                 return {};
@@ -2592,25 +2592,25 @@ namespace Vector {
     template<typename a, int n>
     Vector::vector<a, n> zero() {
         return (([&]() -> Vector::vector<a, n>{
-            Vector::vector<a, n> guid897;
-            guid897.data = (juniper::array<a, n>().fill(0));
-            return guid897;
+            Vector::vector<a, n> guid1008;
+            guid1008.data = (juniper::array<a, n>().fill(0));
+            return guid1008;
         })());
     }
 
     template<typename a, int n>
     Vector::vector<a, n> subtract(Vector::vector<a, n> v1, Vector::vector<a, n> v2) {
         return (([&]() -> Vector::vector<a, n> {
-            auto guid898 = v1;
+            auto guid1009 = v1;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            Vector::vector<a, n> result = guid898;
+            Vector::vector<a, n> result = guid1009;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid899 = 0;
-                uint32_t guid900 = (n - 1);
-                for (uint32_t i = guid899; i <= guid900; i++) {
+                uint32_t guid1010 = 0;
+                uint32_t guid1011 = (n - 1);
+                for (uint32_t i = guid1010; i <= guid1011; i++) {
                     (((result).data)[i] = (((result).data)[i] - ((v2).data)[i]));
                 }
                 return {};
@@ -2622,16 +2622,16 @@ namespace Vector {
     template<typename a, int n>
     Vector::vector<a, n> scale(a scalar, Vector::vector<a, n> v) {
         return (([&]() -> Vector::vector<a, n> {
-            auto guid901 = v;
+            auto guid1012 = v;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            Vector::vector<a, n> result = guid901;
+            Vector::vector<a, n> result = guid1012;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid902 = 0;
-                uint32_t guid903 = (n - 1);
-                for (uint32_t i = guid902; i <= guid903; i++) {
+                uint32_t guid1013 = 0;
+                uint32_t guid1014 = (n - 1);
+                for (uint32_t i = guid1013; i <= guid1014; i++) {
                     (((result).data)[i] = (((result).data)[i] * scalar));
                 }
                 return {};
@@ -2643,16 +2643,16 @@ namespace Vector {
     template<typename a, int n>
     a dot(Vector::vector<a, n> v1, Vector::vector<a, n> v2) {
         return (([&]() -> a {
-            auto guid904 = 0;
+            auto guid1015 = 0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            a sum = guid904;
+            a sum = guid1015;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid905 = 0;
-                uint32_t guid906 = (n - 1);
-                for (uint32_t i = guid905; i <= guid906; i++) {
+                uint32_t guid1016 = 0;
+                uint32_t guid1017 = (n - 1);
+                for (uint32_t i = guid1016; i <= guid1017; i++) {
                     (sum = (sum + (((v1).data)[i] * ((v2).data)[i])));
                 }
                 return {};
@@ -2664,16 +2664,16 @@ namespace Vector {
     template<typename a, int n>
     a magnitude2(Vector::vector<a, n> v) {
         return (([&]() -> a {
-            auto guid907 = 0;
+            auto guid1018 = 0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            a sum = guid907;
+            a sum = guid1018;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid908 = 0;
-                uint32_t guid909 = (n - 1);
-                for (uint32_t i = guid908; i <= guid909; i++) {
+                uint32_t guid1019 = 0;
+                uint32_t guid1020 = (n - 1);
+                for (uint32_t i = guid1019; i <= guid1020; i++) {
                     (sum = (sum + (((v).data)[i] * ((v).data)[i])));
                 }
                 return {};
@@ -2690,16 +2690,16 @@ namespace Vector {
     template<typename a, int n>
     Vector::vector<a, n> multiply(Vector::vector<a, n> u, Vector::vector<a, n> v) {
         return (([&]() -> Vector::vector<a, n> {
-            auto guid910 = u;
+            auto guid1021 = u;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            Vector::vector<a, n> result = guid910;
+            Vector::vector<a, n> result = guid1021;
             
             (([&]() -> Prelude::unit {
-                uint32_t guid911 = 0;
-                uint32_t guid912 = (n - 1);
-                for (uint32_t i = guid911; i <= guid912; i++) {
+                uint32_t guid1022 = 0;
+                uint32_t guid1023 = (n - 1);
+                for (uint32_t i = guid1022; i <= guid1023; i++) {
                     (((result).data)[i] = (((result).data)[i] * ((v).data)[i]));
                 }
                 return {};
@@ -2711,24 +2711,24 @@ namespace Vector {
     template<typename a, int n>
     Vector::vector<a, n> normalize(Vector::vector<a, n> v) {
         return (([&]() -> Vector::vector<a, n> {
-            auto guid913 = magnitude<a, n>(v);
+            auto guid1024 = magnitude<a, n>(v);
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            double mag = guid913;
+            double mag = guid1024;
             
             return ((mag > 0) ? 
                 (([&]() -> Vector::vector<a, n> {
-                    auto guid914 = v;
+                    auto guid1025 = v;
                     if (!(true)) {
                         juniper::quit<Prelude::unit>();
                     }
-                    Vector::vector<a, n> result = guid914;
+                    Vector::vector<a, n> result = guid1025;
                     
                     (([&]() -> Prelude::unit {
-                        uint32_t guid915 = 0;
-                        uint32_t guid916 = (n - 1);
-                        for (uint32_t i = guid915; i <= guid916; i++) {
+                        uint32_t guid1026 = 0;
+                        uint32_t guid1027 = (n - 1);
+                        for (uint32_t i = guid1026; i <= guid1027; i++) {
                             (((result).data)[i] = (((result).data)[i] / mag));
                         }
                         return {};
@@ -2748,20 +2748,20 @@ namespace Vector {
     template<typename a>
     Vector::vector<a, 3> cross(Vector::vector<a, 3> u, Vector::vector<a, 3> v) {
         return (([&]() -> Vector::vector<a, 3>{
-            Vector::vector<a, 3> guid917;
-            guid917.data = (juniper::array<a, 3> { {((((u).data)[1] * ((v).data)[2]) - (((u).data)[2] * ((v).data)[1])), ((((u).data)[2] * ((v).data)[0]) - (((u).data)[0] * ((v).data)[2])), ((((u).data)[0] * ((v).data)[1]) - (((u).data)[1] * ((v).data)[0]))} });
-            return guid917;
+            Vector::vector<a, 3> guid1028;
+            guid1028.data = (juniper::array<a, 3> { {((((u).data)[1] * ((v).data)[2]) - (((u).data)[2] * ((v).data)[1])), ((((u).data)[2] * ((v).data)[0]) - (((u).data)[0] * ((v).data)[2])), ((((u).data)[0] * ((v).data)[1]) - (((u).data)[1] * ((v).data)[0]))} });
+            return guid1028;
         })());
     }
 
     template<typename z, int n>
     Vector::vector<z, n> project(Vector::vector<z, n> a, Vector::vector<z, n> b) {
         return (([&]() -> Vector::vector<z, n> {
-            auto guid918 = normalize<z, n>(b);
+            auto guid1029 = normalize<z, n>(b);
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            Vector::vector<z, n> bn = guid918;
+            Vector::vector<z, n> bn = guid1029;
             
             return scale<z, n>(dot<z, n>(a, bn), bn);
         })());
@@ -2770,6 +2770,154 @@ namespace Vector {
     template<typename z, int n>
     Vector::vector<z, n> projectPlane(Vector::vector<z, n> a, Vector::vector<z, n> m) {
         return subtract<z, n>(a, project<z, n>(a, m));
+    }
+
+}
+
+#include <FastLED.h>
+namespace FastLed {
+
+
+    using namespace Prelude;
+
+
+
+
+
+
+    struct fastLedStrip {
+        juniper::shared_ptr<void> ptr;
+        bool operator==(fastLedStrip rhs) {
+            return true && ptr == rhs.ptr;
+        }
+
+        bool operator!=(fastLedStrip rhs) {
+            return !(rhs == *this);
+        }
+    };
+
+    struct color {
+        uint8_t r;
+        uint8_t g;
+        uint8_t b;
+        bool operator==(color rhs) {
+            return true && r == rhs.r && g == rhs.g && b == rhs.b;
+        }
+
+        bool operator!=(color rhs) {
+            return !(rhs == *this);
+        }
+    };
+
+    FastLed::fastLedStrip make(uint16_t numLeds) {
+        return (([&]() -> FastLed::fastLedStrip {
+            auto guid1030 = juniper::shared_ptr<void>(NULL);
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            juniper::shared_ptr<void> p = guid1030;
+            
+            (([&]() -> Prelude::unit {
+                
+    CRGB *leds = new CRGB[numLeds];
+    p.set((void *) leds);
+    FastLED.addLeds<WS2812, 6, RGB>(leds, numLeds);
+    //FastLED.setBrightness(MAX_BRIGHTNESS);
+    
+                return {};
+            })());
+            Io::setPinMode(6, Io::output());
+            return (([&]() -> FastLed::fastLedStrip{
+                FastLed::fastLedStrip guid1031;
+                guid1031.ptr = p;
+                return guid1031;
+            })());
+        })());
+    }
+
+    Prelude::unit setLedColor(uint16_t n, FastLed::color c, FastLed::fastLedStrip strip) {
+        return (([&]() -> Prelude::unit {
+            auto guid1032 = (strip).ptr;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            juniper::shared_ptr<void> p = guid1032;
+            
+            auto guid1033 = (c).r;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            uint8_t r = guid1033;
+            
+            auto guid1034 = (c).g;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            uint8_t g = guid1034;
+            
+            auto guid1035 = (c).b;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            uint8_t b = guid1035;
+            
+            return (([&]() -> Prelude::unit {
+                ((CRGB *) p.get())[n] = CRGB(g, r, b);
+                return {};
+            })());
+        })());
+    }
+
+    FastLed::color getLedColor(uint16_t n, FastLed::fastLedStrip strip) {
+        return (([&]() -> FastLed::color {
+            auto guid1036 = (strip).ptr;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            juniper::shared_ptr<void> p = guid1036;
+            
+            auto guid1037 = 0;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            uint8_t r = guid1037;
+            
+            auto guid1038 = 0;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            uint8_t g = guid1038;
+            
+            auto guid1039 = 0;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            uint8_t b = guid1039;
+            
+            (([&]() -> Prelude::unit {
+                
+    CRGB c = ((CRGB *) p.get())[n];
+    r = c.r;
+    g = c.g;
+    b = c.b;
+    
+                return {};
+            })());
+            return (([&]() -> FastLed::color{
+                FastLed::color guid1040;
+                guid1040.r = g;
+                guid1040.g = r;
+                guid1040.b = b;
+                return guid1040;
+            })());
+        })());
+    }
+
+    Prelude::unit show() {
+        return (([&]() -> Prelude::unit {
+            FastLED.show();
+            return {};
+        })());
     }
 
 }
@@ -2878,11 +3026,11 @@ namespace Accelerometer {
 
 
     uint16_t xPin = (([&]() -> uint16_t {
-        auto guid919 = 0;
+        auto guid1041 = 0;
         if (!(true)) {
             juniper::quit<Prelude::unit>();
         }
-        uint16_t p = guid919;
+        uint16_t p = guid1041;
         
         (([&]() -> Prelude::unit {
             p = A0;
@@ -2892,11 +3040,11 @@ namespace Accelerometer {
     })());
 
     uint16_t yPin = (([&]() -> uint16_t {
-        auto guid920 = 0;
+        auto guid1042 = 0;
         if (!(true)) {
             juniper::quit<Prelude::unit>();
         }
-        uint16_t p = guid920;
+        uint16_t p = guid1042;
         
         (([&]() -> Prelude::unit {
             p = A1;
@@ -2906,11 +3054,11 @@ namespace Accelerometer {
     })());
 
     uint16_t zPin = (([&]() -> uint16_t {
-        auto guid921 = 0;
+        auto guid1043 = 0;
         if (!(true)) {
             juniper::quit<Prelude::unit>();
         }
-        uint16_t p = guid921;
+        uint16_t p = guid1043;
         
         (([&]() -> Prelude::unit {
             p = A2;
@@ -2921,18 +3069,18 @@ namespace Accelerometer {
 
     uint16_t axisToPin(Accelerometer::axis a) {
         return (([&]() -> uint16_t {
-            Accelerometer::axis guid922 = a;
-            return ((((guid922).tag == 0) && true) ? 
+            Accelerometer::axis guid1044 = a;
+            return ((((guid1044).tag == 0) && true) ? 
                 (([&]() -> uint16_t {
                     return xPin;
                 })())
             :
-                ((((guid922).tag == 1) && true) ? 
+                ((((guid1044).tag == 1) && true) ? 
                     (([&]() -> uint16_t {
                         return yPin;
                     })())
                 :
-                    ((((guid922).tag == 2) && true) ? 
+                    ((((guid1044).tag == 2) && true) ? 
                         (([&]() -> uint16_t {
                             return zPin;
                         })())
@@ -2943,18 +3091,18 @@ namespace Accelerometer {
 
     Prelude::tuple2<int32_t,int32_t> axisToRange(Accelerometer::axis a) {
         return (([&]() -> Prelude::tuple2<int32_t,int32_t> {
-            Accelerometer::axis guid923 = a;
-            return ((((guid923).tag == 0) && true) ? 
+            Accelerometer::axis guid1045 = a;
+            return ((((guid1045).tag == 0) && true) ? 
                 (([&]() -> Prelude::tuple2<int32_t,int32_t> {
                     return (Prelude::tuple2<int32_t,int32_t>{404, 612});
                 })())
             :
-                ((((guid923).tag == 1) && true) ? 
+                ((((guid1045).tag == 1) && true) ? 
                     (([&]() -> Prelude::tuple2<int32_t,int32_t> {
                         return (Prelude::tuple2<int32_t,int32_t>{409, 622});
                     })())
                 :
-                    ((((guid923).tag == 2) && true) ? 
+                    ((((guid1045).tag == 2) && true) ? 
                         (([&]() -> Prelude::tuple2<int32_t,int32_t> {
                             return (Prelude::tuple2<int32_t,int32_t>{418, 622});
                         })())
@@ -2965,24 +3113,24 @@ namespace Accelerometer {
 
     uint16_t readRaw(Accelerometer::axis a) {
         return (([&]() -> int32_t {
-            auto guid924 = axisToPin(a);
+            auto guid1046 = axisToPin(a);
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint16_t pin = guid924;
+            uint16_t pin = guid1046;
             
             Io::anaRead(pin);
             Time::wait(1);
-            auto guid925 = 0;
+            auto guid1047 = 0;
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            uint32_t total = guid925;
+            uint32_t total = guid1047;
             
             (([&]() -> Prelude::unit {
-                uint8_t guid926 = 0;
-                uint8_t guid927 = 3;
-                for (uint8_t i = guid926; i <= guid927; i++) {
+                uint8_t guid1048 = 0;
+                uint8_t guid1049 = 3;
+                for (uint8_t i = guid1048; i <= guid1049; i++) {
                     (total = (total + Io::anaRead(pin)));
                 }
                 return {};
@@ -2993,12 +3141,12 @@ namespace Accelerometer {
 
     int16_t read(Accelerometer::axis a) {
         return (([&]() -> double {
-            auto guid928 = axisToRange(a);
+            auto guid1050 = axisToRange(a);
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            int32_t max = (guid928).e2;
-            int32_t min = (guid928).e1;
+            int32_t max = (guid1050).e2;
+            int32_t min = (guid1050).e1;
             
             return Math::mapRange(readRaw(a), min, max, -1000, 1000);
         })());
@@ -3006,23 +3154,23 @@ namespace Accelerometer {
 
     Prelude::maybe<Accelerometer::orientation> getOrientation() {
         return (([&]() -> Prelude::maybe<Accelerometer::orientation> {
-            auto guid929 = read(xAxis());
+            auto guid1051 = read(xAxis());
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            int16_t xScaled = guid929;
+            int16_t xScaled = guid1051;
             
-            auto guid930 = read(yAxis());
+            auto guid1052 = read(yAxis());
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            int16_t yScaled = guid930;
+            int16_t yScaled = guid1052;
             
-            auto guid931 = read(zAxis());
+            auto guid1053 = read(zAxis());
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            int16_t zScaled = guid931;
+            int16_t zScaled = guid1053;
             
             return ((-800 > zScaled) ? 
                 just<Accelerometer::orientation>(zDown())
@@ -3052,8 +3200,7 @@ namespace Accelerometer {
 
 }
 
-#include <FastLED.h>
-namespace FastLed {
+namespace IoExt {
 
 
     using namespace Prelude;
@@ -3061,245 +3208,17 @@ namespace FastLed {
 
 
 
-
-
-    struct fastLedStrip {
-        juniper::shared_ptr<void> ptr;
-        bool operator==(fastLedStrip rhs) {
-            return true && ptr == rhs.ptr;
-        }
-
-        bool operator!=(fastLedStrip rhs) {
-            return !(rhs == *this);
-        }
-    };
-
-    struct color {
-        uint8_t r;
-        uint8_t g;
-        uint8_t b;
-        bool operator==(color rhs) {
-            return true && r == rhs.r && g == rhs.g && b == rhs.b;
-        }
-
-        bool operator!=(color rhs) {
-            return !(rhs == *this);
-        }
-    };
-
-    FastLed::fastLedStrip make(uint16_t numLeds) {
-        return (([&]() -> FastLed::fastLedStrip {
-            auto guid932 = juniper::shared_ptr<void>(NULL);
+    Prelude::sig<Io::pinState> every(uint32_t interval, juniper::shared_ptr<Time::timerState> tState, juniper::shared_ptr<Io::pinState> outState) {
+        return (([&]() -> Prelude::sig<Io::pinState> {
+            auto guid1054 = Time::every(interval, tState);
             if (!(true)) {
                 juniper::quit<Prelude::unit>();
             }
-            juniper::shared_ptr<void> p = guid932;
+            Prelude::sig<uint32_t> timerSig = guid1054;
             
-            (([&]() -> Prelude::unit {
-                
-    CRGB *leds = new CRGB[numLeds];
-    p.set((void *) leds);
-    FastLED.addLeds<WS2812, 6, RGB>(leds, numLeds);
-    //FastLED.setBrightness(MAX_BRIGHTNESS);
-    
-                return {};
-            })());
-            Io::setPinMode(6, Io::output());
-            return (([&]() -> FastLed::fastLedStrip{
-                FastLed::fastLedStrip guid933;
-                guid933.ptr = p;
-                return guid933;
-            })());
-        })());
-    }
-
-    Prelude::unit setLedColor(uint16_t n, FastLed::color c, FastLed::fastLedStrip strip) {
-        return (([&]() -> Prelude::unit {
-            auto guid934 = (strip).ptr;
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            juniper::shared_ptr<void> p = guid934;
-            
-            auto guid935 = (c).r;
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            uint8_t r = guid935;
-            
-            auto guid936 = (c).g;
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            uint8_t g = guid936;
-            
-            auto guid937 = (c).b;
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            uint8_t b = guid937;
-            
-            return (([&]() -> Prelude::unit {
-                ((CRGB *) p.get())[n] = CRGB(g, r, b);
-                return {};
-            })());
-        })());
-    }
-
-    FastLed::color getLedColor(uint16_t n, FastLed::fastLedStrip strip) {
-        return (([&]() -> FastLed::color {
-            auto guid938 = (strip).ptr;
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            juniper::shared_ptr<void> p = guid938;
-            
-            auto guid939 = 0;
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            uint8_t r = guid939;
-            
-            auto guid940 = 0;
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            uint8_t g = guid940;
-            
-            auto guid941 = 0;
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            uint8_t b = guid941;
-            
-            (([&]() -> Prelude::unit {
-                
-    CRGB c = ((CRGB *) p.get())[n];
-    r = c.r;
-    g = c.g;
-    b = c.b;
-    
-                return {};
-            })());
-            return (([&]() -> FastLed::color{
-                FastLed::color guid942;
-                guid942.r = r;
-                guid942.g = g;
-                guid942.b = b;
-                return guid942;
-            })());
-        })());
-    }
-
-    Prelude::unit show() {
-        return (([&]() -> Prelude::unit {
-            FastLED.show();
-            return {};
-        })());
-    }
-
-}
-
-namespace Finale {
-
-
-    using namespace Prelude;
-
-
-
-
-    Prelude::unit execute() {
-        return Prelude::unit();
-    }
-
-}
-
-namespace Paused {
-
-
-    using namespace Prelude;
-
-
-
-
-    Prelude::unit execute() {
-        return Prelude::unit();
-    }
-
-}
-
-namespace Setting {
-
-
-    using namespace Prelude;
-
-
-
-
-    juniper::shared_ptr<Button::buttonState> bState = Button::state();
-
-    juniper::shared_ptr<Io::pinState> bEdgeState = (juniper::shared_ptr<Io::pinState>(new Io::pinState(Io::low())));
-
-    uint16_t buttonPin = 4;
-
-    uint16_t numLeds = 33;
-
-    juniper::shared_ptr<int32_t> numLedsLit = (juniper::shared_ptr<int32_t>(new int32_t(1)));
-
-    FastLed::color blue = (([&]() -> FastLed::color{
-        FastLed::color guid943;
-        guid943.r = 0;
-        guid943.g = 0;
-        guid943.b = 255;
-        return guid943;
-    })());
-
-    juniper::shared_ptr<int32_t> numLedsLitState = (juniper::shared_ptr<int32_t>(new int32_t((*((numLedsLit).get())))));
-
-    Prelude::unit reset(juniper::shared_ptr<int32_t> timeRemaining) {
-        return (([&]() -> Prelude::unit {
-            (*((int32_t*) (numLedsLit.get())) = 1);
-            (*((int32_t*) (numLedsLitState.get())) = 1);
-            (*((int32_t*) (timeRemaining.get())) = 60000);
-            return Prelude::unit();
-        })());
-    }
-
-    Prelude::unit execute(juniper::shared_ptr<int32_t> timeRemaining, FastLed::fastLedStrip leds) {
-        return (([&]() -> Prelude::unit {
-            auto guid944 = Io::risingEdge(Button::debounce(Io::digIn(buttonPin), bState), bEdgeState);
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            Prelude::sig<Prelude::unit> buttonSig = guid944;
-            
-            auto guid945 = Signal::foldP<Prelude::unit, int32_t>(juniper::function<int32_t(Prelude::unit,int32_t)>([=](Prelude::unit u, int32_t prevNumLedsLit) mutable -> int32_t { 
-                return (prevNumLedsLit + 1);
-             }), numLedsLit, buttonSig);
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            Prelude::sig<int32_t> numLedsLitUpdateSig = guid945;
-            
-            auto guid946 = Signal::latch<int32_t>(numLedsLitUpdateSig, numLedsLitState);
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            Prelude::sig<int32_t> numLedsLitSig = guid946;
-            
-            return Signal::sink<int32_t>(juniper::function<Prelude::unit(int32_t)>([=](int32_t n) mutable -> Prelude::unit { 
-                return (([&]() -> Prelude::unit {
-                    (*((int32_t*) (timeRemaining.get())) = (n * 60000));
-                    return (([&]() -> Prelude::unit {
-                        uint16_t guid947 = 0;
-                        uint16_t guid948 = (n - 1);
-                        for (uint16_t i = guid947; i <= guid948; i++) {
-                            FastLed::setLedColor(((numLeds - i) - 1), blue, leds);
-                        }
-                        return {};
-                    })());
-                })());
-             }), numLedsLitSig);
+            return Signal::foldP<uint32_t, Io::pinState>(juniper::function<Io::pinState(uint32_t,Io::pinState)>([=](uint32_t currentTime, Io::pinState lastState) mutable -> Io::pinState { 
+                return Io::toggle(lastState);
+             }), outState, timerSig);
         })());
     }
 
@@ -3321,19 +3240,45 @@ namespace SignalExt {
     template<typename a>
     Prelude::sig<Prelude::maybe<a>> meta(Prelude::sig<a> sigA) {
         return (([&]() -> Prelude::sig<Prelude::maybe<a>> {
-            auto guid949 = sigA;
-            if (!((((guid949).tag == 0) && true))) {
+            auto guid1055 = sigA;
+            if (!((((guid1055).tag == 0) && true))) {
                 juniper::quit<Prelude::unit>();
             }
-            auto val = (guid949).signal;
+            auto val = (guid1055).signal;
             
             return constant<Prelude::maybe<a>>(val);
         })());
     }
 
+    template<typename a>
+    Prelude::sig<a> unmeta(Prelude::sig<Prelude::maybe<a>> sigA) {
+        return (([&]() -> Prelude::sig<a> {
+            Prelude::sig<Prelude::maybe<a>> guid1056 = sigA;
+            return ((((guid1056).tag == 0) && ((((guid1056).signal).tag == 0) && (((((guid1056).signal).just).tag == 0) && true))) ? 
+                (([&]() -> Prelude::sig<a> {
+                    auto val = (((guid1056).signal).just).just;
+                    return constant<a>(val);
+                })())
+            :
+                (true ? 
+                    (([&]() -> Prelude::sig<a> {
+                        return signal<a>(nothing<a>());
+                    })())
+                :
+                    juniper::quit<Prelude::sig<a>>()));
+        })());
+    }
+
+    template<typename a, typename b>
+    Prelude::sig<Prelude::tuple2<a,b>> zip(Prelude::sig<a> sigA, Prelude::sig<b> sigB, juniper::shared_ptr<Prelude::tuple2<a,b>> state) {
+        return Signal::map2<a, b, Prelude::tuple2<a,b>>(juniper::function<Prelude::tuple2<a,b>(a,b)>([=](a valA, b valB) mutable -> Prelude::tuple2<a,b> { 
+            return (Prelude::tuple2<a,b>{valA, valB});
+         }), sigA, sigB, state);
+    }
+
 }
 
-namespace Timing {
+namespace Constants {
 
 
     using namespace Prelude;
@@ -3341,8 +3286,442 @@ namespace Timing {
 
 
 
+    FastLed::color blank = (([&]() -> FastLed::color{
+        FastLed::color guid1057;
+        guid1057.r = 0;
+        guid1057.g = 0;
+        guid1057.b = 0;
+        return guid1057;
+    })());
+
+    FastLed::color red = (([&]() -> FastLed::color{
+        FastLed::color guid1058;
+        guid1058.r = 255;
+        guid1058.g = 0;
+        guid1058.b = 0;
+        return guid1058;
+    })());
+
+    FastLed::color green = (([&]() -> FastLed::color{
+        FastLed::color guid1059;
+        guid1059.r = 0;
+        guid1059.g = 255;
+        guid1059.b = 0;
+        return guid1059;
+    })());
+
+    FastLed::color blue = (([&]() -> FastLed::color{
+        FastLed::color guid1060;
+        guid1060.r = 0;
+        guid1060.g = 0;
+        guid1060.b = 255;
+        return guid1060;
+    })());
+
+    FastLed::color white = (([&]() -> FastLed::color{
+        FastLed::color guid1061;
+        guid1061.r = 255;
+        guid1061.g = 255;
+        guid1061.b = 255;
+        return guid1061;
+    })());
+
+    FastLed::color pink = (([&]() -> FastLed::color{
+        FastLed::color guid1062;
+        guid1062.r = 255;
+        guid1062.g = 50;
+        guid1062.b = 100;
+        return guid1062;
+    })());
+
+    uint16_t buttonPin = 4;
+
+    uint16_t numLeds = 33;
+
+    FastLed::fastLedStrip leds = FastLed::make(numLeds);
+
+}
+
+namespace Timing {
+
+
+    using namespace Prelude;
+    using namespace Constants;
+
+
+
+
+    juniper::shared_ptr<int32_t> lastTime = (juniper::shared_ptr<int32_t>(new int32_t(0)));
+
+    Prelude::unit reset() {
+        return (([&]() -> Prelude::unit {
+            (*((uint32_t*) (lastTime.get())) = Time::now());
+            return Prelude::unit();
+        })());
+    }
+
+    FastLed::color interpolate(FastLed::color c1, FastLed::color c2, float t) {
+        return (([&]() -> FastLed::color {
+            auto guid1063 = c1;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            uint8_t b1 = (guid1063).b;
+            uint8_t g1 = (guid1063).g;
+            uint8_t r1 = (guid1063).r;
+            
+            auto guid1064 = c2;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            uint8_t b2 = (guid1064).b;
+            uint8_t g2 = (guid1064).g;
+            uint8_t r2 = (guid1064).r;
+            
+            return (([&]() -> FastLed::color{
+                FastLed::color guid1065;
+                guid1065.r = ((t * r1) + ((1.0 - t) * r2));
+                guid1065.g = ((t * g1) + ((1.0 - t) * g2));
+                guid1065.b = ((t * b1) + ((1.0 - t) * b2));
+                return guid1065;
+            })());
+        })());
+    }
+
+    Prelude::unit execute(juniper::shared_ptr<int32_t> timeRemaining, int32_t totalTime) {
+        return (([&]() -> Prelude::unit {
+            auto guid1066 = Time::now();
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            uint32_t currentTime = guid1066;
+            
+            auto guid1067 = (currentTime - (*((lastTime).get())));
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            int32_t deltaT = guid1067;
+            
+            (*((int32_t*) (timeRemaining.get())) = ((*((timeRemaining).get())) - deltaT));
+            (*((uint32_t*) (lastTime.get())) = currentTime);
+            auto guid1068 = (*((timeRemaining).get()));
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            float timeRemainingF = guid1068;
+            
+            auto guid1069 = totalTime;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            float totalTimeF = guid1069;
+            
+            auto guid1070 = (timeRemainingF / totalTimeF);
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            float tPrime = guid1070;
+            
+            auto guid1071 = numLeds;
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            float numLedsF = guid1071;
+            
+            (([&]() -> Prelude::unit {
+                int32_t guid1072 = 0;
+                int32_t guid1073 = (numLeds - 1);
+                for (int32_t i = guid1072; i <= guid1073; i++) {
+                    (([&]() -> Prelude::unit {
+                        auto guid1074 = Math::min_((((i + 1) * numLeds) - (((1 - tPrime) * numLeds) * numLeds)), i);
+                        if (!(true)) {
+                            juniper::quit<Prelude::unit>();
+                        }
+                        double pos = guid1074;
+                        
+                        return (((0.0 <= pos) && (numLeds > pos)) ? 
+                            FastLed::setLedColor(pos, interpolate(red, green, (i / numLedsF)), leds)
+                        :
+                            Prelude::unit());
+                    })());
+                }
+                return {};
+            })());
+            return Prelude::unit();
+        })());
+    }
+
+}
+
+namespace Setting {
+
+
+    using namespace Prelude;
+    using namespace Constants;
+
+
+
+
+    struct timeSetting {
+        int32_t minutes;
+        int32_t fifteenSeconds;
+        bool operator==(timeSetting rhs) {
+            return true && minutes == rhs.minutes && fifteenSeconds == rhs.fifteenSeconds;
+        }
+
+        bool operator!=(timeSetting rhs) {
+            return !(rhs == *this);
+        }
+    };
+
+    juniper::shared_ptr<Button::buttonState> bState = Button::state();
+
+    juniper::shared_ptr<Io::pinState> bEdgeState = (juniper::shared_ptr<Io::pinState>(new Io::pinState(Io::low())));
+
+    juniper::shared_ptr<Setting::timeSetting> numLedsLit = (juniper::shared_ptr<Setting::timeSetting>(new Setting::timeSetting((([&]() -> Setting::timeSetting{
+        Setting::timeSetting guid1075;
+        guid1075.minutes = 0;
+        guid1075.fifteenSeconds = 0;
+        return guid1075;
+    })()))));
+
+    juniper::shared_ptr<Time::timerState> tState = Time::state();
+
+    juniper::shared_ptr<Io::pinState> cursorState = (juniper::shared_ptr<Io::pinState>(new Io::pinState(Io::low())));
+
+    juniper::shared_ptr<Prelude::tuple2<Io::pinState,Setting::timeSetting>> outputUpdateState = (juniper::shared_ptr<Prelude::tuple2<Io::pinState,Setting::timeSetting>>(new Prelude::tuple2<Io::pinState,Setting::timeSetting>((Prelude::tuple2<Io::pinState,Setting::timeSetting>{(*((cursorState).get())), (*((numLedsLit).get()))}))));
+
+    juniper::shared_ptr<Prelude::tuple2<Io::pinState,Setting::timeSetting>> outputState = (juniper::shared_ptr<Prelude::tuple2<Io::pinState,Setting::timeSetting>>(new Prelude::tuple2<Io::pinState,Setting::timeSetting>((*((outputUpdateState).get())))));
+
+    Prelude::unit reset(juniper::shared_ptr<int32_t> timeRemaining) {
+        return (([&]() -> Prelude::unit {
+            (*((Setting::timeSetting*) (numLedsLit.get())) = (([&]() -> Setting::timeSetting{
+                Setting::timeSetting guid1076;
+                guid1076.minutes = 0;
+                guid1076.fifteenSeconds = 0;
+                return guid1076;
+            })()));
+            (*((Io::pinState*) (cursorState.get())) = Io::low());
+            (*((Prelude::tuple2<Io::pinState,Setting::timeSetting>*) (outputUpdateState.get())) = (Prelude::tuple2<Io::pinState,Setting::timeSetting>{(*((cursorState).get())), (*((numLedsLit).get()))}));
+            (*((Prelude::tuple2<Io::pinState,Setting::timeSetting>*) (outputState.get())) = (*((outputUpdateState).get())));
+            (*((int32_t*) (timeRemaining.get())) = 0);
+            return Prelude::unit();
+        })());
+    }
+
+    Prelude::unit execute(juniper::shared_ptr<int32_t> timeRemaining) {
+        return (([&]() -> Prelude::unit {
+            auto guid1077 = IoExt::every(500, tState, cursorState);
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            Prelude::sig<Io::pinState> cursorSig = guid1077;
+            
+            auto guid1078 = Io::risingEdge(Button::debounce(Io::digIn(buttonPin), bState), bEdgeState);
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            Prelude::sig<Prelude::unit> buttonSig = guid1078;
+            
+            auto guid1079 = Signal::foldP<Prelude::unit, Setting::timeSetting>(juniper::function<Setting::timeSetting(Prelude::unit,Setting::timeSetting)>([=](Prelude::unit u, Setting::timeSetting prevSetting) mutable -> Setting::timeSetting { 
+                return (([&]() -> Setting::timeSetting {
+                    auto guid1080 = prevSetting;
+                    if (!(true)) {
+                        juniper::quit<Prelude::unit>();
+                    }
+                    int32_t prevFifteenSeconds = (guid1080).fifteenSeconds;
+                    int32_t prevMinutes = (guid1080).minutes;
+                    
+                    return ((((prevMinutes + prevFifteenSeconds) + 1) >= numLeds) ? 
+                        prevSetting
+                    :
+                        ((((prevFifteenSeconds + 1) % 4) == 0) ? 
+                            (([&]() -> Setting::timeSetting{
+                                Setting::timeSetting guid1081;
+                                guid1081.minutes = (prevMinutes + 1);
+                                guid1081.fifteenSeconds = 0;
+                                return guid1081;
+                            })())
+                        :
+                            (([&]() -> Setting::timeSetting{
+                                Setting::timeSetting guid1082;
+                                guid1082.minutes = prevMinutes;
+                                guid1082.fifteenSeconds = (prevFifteenSeconds + 1);
+                                return guid1082;
+                            })())));
+                })());
+             }), numLedsLit, buttonSig);
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            Prelude::sig<Setting::timeSetting> numLedsLitUpdateSig = guid1079;
+            
+            auto guid1083 = SignalExt::zip<Io::pinState, Setting::timeSetting>(cursorSig, numLedsLitUpdateSig, outputUpdateState);
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            Prelude::sig<Prelude::tuple2<Io::pinState,Setting::timeSetting>> outputUpdateSig = guid1083;
+            
+            auto guid1084 = Signal::latch<Prelude::tuple2<Io::pinState,Setting::timeSetting>>(outputUpdateSig, outputState);
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            Prelude::sig<Prelude::tuple2<Io::pinState,Setting::timeSetting>> outputSig = guid1084;
+            
+            return Signal::sink<Prelude::tuple2<Io::pinState,Setting::timeSetting>>(juniper::function<Prelude::unit(Prelude::tuple2<Io::pinState,Setting::timeSetting>)>([=](Prelude::tuple2<Io::pinState,Setting::timeSetting> out) mutable -> Prelude::unit { 
+                return (([&]() -> Prelude::unit {
+                    auto guid1085 = out;
+                    if (!(true)) {
+                        juniper::quit<Prelude::unit>();
+                    }
+                    int32_t numFifteenSeconds = ((guid1085).e2).fifteenSeconds;
+                    int32_t numMinutes = ((guid1085).e2).minutes;
+                    Io::pinState cursor = (guid1085).e1;
+                    
+                    (*((int32_t*) (timeRemaining.get())) = ((numMinutes * 60000) + (numFifteenSeconds * 15000)));
+                    (([&]() -> Prelude::unit {
+                        int32_t guid1086 = 0;
+                        int32_t guid1087 = (numMinutes - 1);
+                        for (int32_t i = guid1086; i <= guid1087; i++) {
+                            FastLed::setLedColor(((numLeds - i) - 1), blue, leds);
+                        }
+                        return {};
+                    })());
+                    (([&]() -> Prelude::unit {
+                        int32_t guid1088 = 0;
+                        int32_t guid1089 = (numFifteenSeconds - 1);
+                        for (int32_t i = guid1088; i <= guid1089; i++) {
+                            FastLed::setLedColor(((numLeds - (numMinutes + i)) - 1), pink, leds);
+                        }
+                        return {};
+                    })());
+                    return (([&]() -> Prelude::unit {
+                        Io::pinState guid1090 = cursor;
+                        return ((((guid1090).tag == 0) && true) ? 
+                            (([&]() -> Prelude::unit {
+                                return FastLed::setLedColor(((numLeds - (numMinutes + numFifteenSeconds)) - 1), white, leds);
+                            })())
+                        :
+                            (true ? 
+                                (([&]() -> Prelude::unit {
+                                    return Prelude::unit();
+                                })())
+                            :
+                                juniper::quit<Prelude::unit>()));
+                    })());
+                })());
+             }), outputSig);
+        })());
+    }
+
+}
+
+namespace Paused {
+
+
+    using namespace Prelude;
+    using namespace Constants;
+
+
+
+
+    Prelude::unit execute(juniper::shared_ptr<int32_t> timeRemaining, int32_t totalTime) {
+        return (([&]() -> Prelude::unit {
+            auto guid1091 = (*((timeRemaining).get()));
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            int32_t t = guid1091;
+            
+            Timing::execute(timeRemaining, totalTime);
+            (*((int32_t*) (timeRemaining.get())) = t);
+            auto guid1092 = (0.5 * (Math::sin_((((2.0 * Math::pi) * Time::now()) / 1000.0)) + 1.0));
+            if (!(true)) {
+                juniper::quit<Prelude::unit>();
+            }
+            float multiplier = guid1092;
+            
+            return (([&]() -> Prelude::unit {
+                int32_t guid1093 = 0;
+                int32_t guid1094 = (numLeds - 1);
+                for (int32_t i = guid1093; i <= guid1094; i++) {
+                    (([&]() -> Prelude::unit {
+                        auto guid1095 = FastLed::getLedColor(i, leds);
+                        if (!(true)) {
+                            juniper::quit<Prelude::unit>();
+                        }
+                        uint8_t b = (guid1095).b;
+                        uint8_t g = (guid1095).g;
+                        uint8_t r = (guid1095).r;
+                        
+                        auto guid1096 = (([&]() -> FastLed::color{
+                            FastLed::color guid1097;
+                            guid1097.r = (r * multiplier);
+                            guid1097.g = (g * multiplier);
+                            guid1097.b = (b * multiplier);
+                            return guid1097;
+                        })());
+                        if (!(true)) {
+                            juniper::quit<Prelude::unit>();
+                        }
+                        FastLed::color newColor = guid1096;
+                        
+                        return FastLed::setLedColor(i, newColor, leds);
+                    })());
+                }
+                return {};
+            })());
+        })());
+    }
+
+}
+
+namespace Finale {
+
+
+    using namespace Prelude;
+    using namespace Constants;
+
+
+
+
+    float numLedsF = numLeds;
+
     Prelude::unit execute() {
-        return Prelude::unit();
+        return (([&]() -> Prelude::unit {
+            int32_t guid1098 = 0;
+            int32_t guid1099 = (numLeds - 1);
+            for (int32_t i = guid1098; i <= guid1099; i++) {
+                (([&]() -> Prelude::unit {
+                    auto guid1100 = Time::now();
+                    if (!(true)) {
+                        juniper::quit<Prelude::unit>();
+                    }
+                    uint32_t t = guid1100;
+                    
+                    auto guid1101 = (((i / numLedsF) * 1000) + t);
+                    if (!(true)) {
+                        juniper::quit<Prelude::unit>();
+                    }
+                    float x = guid1101;
+                    
+                    auto guid1102 = (([&]() -> FastLed::color{
+                        FastLed::color guid1103;
+                        guid1103.r = (50 * Math::sin_((((2.0 * Math::pi) * x) / 1000.0)));
+                        guid1103.g = (50 * Math::cos_((((2.0 * Math::pi) * x) / 1000.0)));
+                        guid1103.b = (50 * Math::sin_((((2.0 * Math::pi) * (x + (Math::pi / 2.0))) / 1000.0)));
+                        return guid1103;
+                    })());
+                    if (!(true)) {
+                        juniper::quit<Prelude::unit>();
+                    }
+                    FastLed::color color = guid1102;
+                    
+                    return FastLed::setLedColor(i, color, leds);
+                })());
+            }
+            return {};
+        })());
     }
 
 }
@@ -3351,6 +3730,7 @@ namespace Program {
 
 
     using namespace Prelude;
+    using namespace Constants;
 
 
     struct mode {
@@ -3434,109 +3814,51 @@ namespace Program {
 
 
 
-    uint16_t numLeds = 33;
-
-    FastLed::fastLedStrip leds = FastLed::make(numLeds);
-
     juniper::shared_ptr<Prelude::maybe<Accelerometer::orientation>> accState = (juniper::shared_ptr<Prelude::maybe<Accelerometer::orientation>>(new Prelude::maybe<Accelerometer::orientation>(nothing<Accelerometer::orientation>())));
 
     juniper::shared_ptr<Program::mode> modeState = (juniper::shared_ptr<Program::mode>(new Program::mode(setting())));
 
     juniper::shared_ptr<int32_t> timeRemaining = (juniper::shared_ptr<int32_t>(new int32_t(0)));
 
+    juniper::shared_ptr<int32_t> totalTime = (juniper::shared_ptr<int32_t>(new int32_t(0)));
+
     Prelude::unit setup() {
         return Time::wait(500);
+    }
+
+    Prelude::unit clearDisplay() {
+        return (([&]() -> Prelude::unit {
+            uint16_t guid1104 = 0;
+            uint16_t guid1105 = (numLeds - 1);
+            for (uint16_t i = guid1104; i <= guid1105; i++) {
+                FastLed::setLedColor(i, blank, leds);
+            }
+            return {};
+        })());
     }
 
     Prelude::unit main() {
         return (([&]() -> Prelude::unit {
             setup();
-            auto guid950 = (([&]() -> FastLed::color{
-                FastLed::color guid951;
-                guid951.r = 0;
-                guid951.g = 0;
-                guid951.b = 0;
-                return guid951;
-            })());
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            FastLed::color blank = guid950;
-            
-            auto guid952 = (([&]() -> FastLed::color{
-                FastLed::color guid953;
-                guid953.r = 255;
-                guid953.g = 0;
-                guid953.b = 0;
-                return guid953;
-            })());
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            FastLed::color red = guid952;
-            
-            auto guid954 = (([&]() -> FastLed::color{
-                FastLed::color guid955;
-                guid955.r = 0;
-                guid955.g = 255;
-                guid955.b = 0;
-                return guid955;
-            })());
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            FastLed::color green = guid954;
-            
-            auto guid956 = (([&]() -> FastLed::color{
-                FastLed::color guid957;
-                guid957.r = 0;
-                guid957.g = 0;
-                guid957.b = 255;
-                return guid957;
-            })());
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            FastLed::color blue = guid956;
-            
-            auto guid958 = (([&]() -> FastLed::color{
-                FastLed::color guid959;
-                guid959.r = 255;
-                guid959.g = 255;
-                guid959.b = 255;
-                return guid959;
-            })());
-            if (!(true)) {
-                juniper::quit<Prelude::unit>();
-            }
-            FastLed::color white = guid958;
-            
             return (([&]() -> Prelude::unit {
                 while (true) {
                     (([&]() -> Prelude::unit {
-                        (([&]() -> Prelude::unit {
-                            uint16_t guid960 = 0;
-                            uint16_t guid961 = 32;
-                            for (uint16_t i = guid960; i <= guid961; i++) {
-                                FastLed::setLedColor(i, blank, leds);
-                            }
-                            return {};
-                        })());
-                        auto guid962 = Signal::dropRepeats<Accelerometer::orientation>(Accelerometer::getSignal(), accState);
+                        clearDisplay();
+                        auto guid1106 = Signal::dropRepeats<Accelerometer::orientation>(Accelerometer::getSignal(), accState);
                         if (!(true)) {
                             juniper::quit<Prelude::unit>();
                         }
-                        Prelude::sig<Accelerometer::orientation> accSig = guid962;
+                        Prelude::sig<Accelerometer::orientation> accSig = guid1106;
                         
-                        auto guid963 = Signal::map<Accelerometer::orientation, Program::flip>(juniper::function<Program::flip(Accelerometer::orientation)>([=](Accelerometer::orientation o) mutable -> Program::flip { 
+                        auto guid1107 = Signal::map<Accelerometer::orientation, Program::flip>(juniper::function<Program::flip(Accelerometer::orientation)>([=](Accelerometer::orientation o) mutable -> Program::flip { 
                             return (([&]() -> Program::flip {
-                                Accelerometer::orientation guid964 = o;
-                                return ((((guid964).tag == 0) && true) ? 
+                                Accelerometer::orientation guid1108 = o;
+                                return ((((guid1108).tag == 0) && true) ? 
                                     (([&]() -> Program::flip {
                                         return flipUp();
                                     })())
                                 :
-                                    ((((guid964).tag == 1) && true) ? 
+                                    ((((guid1108).tag == 1) && true) ? 
                                         (([&]() -> Program::flip {
                                             return flipDown();
                                         })())
@@ -3552,36 +3874,40 @@ namespace Program {
                         if (!(true)) {
                             juniper::quit<Prelude::unit>();
                         }
-                        Prelude::sig<Program::flip> flipSig = guid963;
+                        Prelude::sig<Program::flip> flipSig = guid1107;
                         
-                        auto guid965 = SignalExt::meta<Program::flip>(flipSig);
+                        auto guid1109 = SignalExt::meta<Program::flip>(flipSig);
                         if (!(true)) {
                             juniper::quit<Prelude::unit>();
                         }
-                        Prelude::sig<Prelude::maybe<Program::flip>> metaFlipSig = guid965;
+                        Prelude::sig<Prelude::maybe<Program::flip>> metaFlipSig = guid1109;
                         
-                        auto guid966 = Signal::foldP<Prelude::maybe<Program::flip>, Program::mode>(juniper::function<Program::mode(Prelude::maybe<Program::flip>,Program::mode)>([=](Prelude::maybe<Program::flip> f1, Program::mode prevMode) mutable -> Program::mode { 
-                            return (((prevMode == timing()) && ((*((timeRemaining).get())) == 0)) ? 
+                        auto guid1110 = Signal::foldP<Prelude::maybe<Program::flip>, Program::mode>(juniper::function<Program::mode(Prelude::maybe<Program::flip>,Program::mode)>([=](Prelude::maybe<Program::flip> f1, Program::mode prevMode) mutable -> Program::mode { 
+                            return (((prevMode == timing()) && ((*((timeRemaining).get())) <= 0)) ? 
                                 finale()
                             :
                                 (([&]() -> Program::mode {
-                                    Prelude::maybe<Program::flip> guid967 = f1;
-                                    return ((((guid967).tag == 0) && true) ? 
+                                    Prelude::maybe<Program::flip> guid1111 = f1;
+                                    return ((((guid1111).tag == 0) && true) ? 
                                         (([&]() -> Program::mode {
-                                            auto f2 = (guid967).just;
+                                            auto f2 = (guid1111).just;
                                             return (([&]() -> Program::mode {
-                                                Prelude::tuple2<Program::flip,Program::mode> guid968 = (Prelude::tuple2<Program::flip,Program::mode>{f2, prevMode});
-                                                return (((((guid968).e2).tag == 0) && ((((guid968).e1).tag == 0) && true)) ? 
+                                                Prelude::tuple2<Program::flip,Program::mode> guid1112 = (Prelude::tuple2<Program::flip,Program::mode>{f2, prevMode});
+                                                return (((((guid1112).e2).tag == 0) && ((((guid1112).e1).tag == 0) && true)) ? 
                                                     (([&]() -> Program::mode {
-                                                        return timing();
+                                                        return (([&]() -> Program::mode {
+                                                            (*((int32_t*) (totalTime.get())) = (*((timeRemaining).get())));
+                                                            Timing::reset();
+                                                            return timing();
+                                                        })());
                                                     })())
                                                 :
-                                                    (((((guid968).e2).tag == 2) && ((((guid968).e1).tag == 0) && true)) ? 
+                                                    (((((guid1112).e2).tag == 2) && ((((guid1112).e1).tag == 0) && true)) ? 
                                                         (([&]() -> Program::mode {
                                                             return timing();
                                                         })())
                                                     :
-                                                        (((((guid968).e2).tag == 1) && ((((guid968).e1).tag == 1) && true)) ? 
+                                                        (((((guid1112).e2).tag == 1) && ((((guid1112).e1).tag == 1) && true)) ? 
                                                             (([&]() -> Program::mode {
                                                                 return (([&]() -> Program::mode {
                                                                     Setting::reset(timeRemaining);
@@ -3589,7 +3915,7 @@ namespace Program {
                                                                 })());
                                                             })())
                                                         :
-                                                            (((((guid968).e2).tag == 2) && ((((guid968).e1).tag == 1) && true)) ? 
+                                                            (((((guid1112).e2).tag == 2) && ((((guid1112).e1).tag == 1) && true)) ? 
                                                                 (([&]() -> Program::mode {
                                                                     return (([&]() -> Program::mode {
                                                                         Setting::reset(timeRemaining);
@@ -3597,17 +3923,25 @@ namespace Program {
                                                                     })());
                                                                 })())
                                                             :
-                                                                (((((guid968).e2).tag == 1) && ((((guid968).e1).tag == 2) && true)) ? 
+                                                                (((((guid1112).e2).tag == 1) && ((((guid1112).e1).tag == 2) && true)) ? 
                                                                     (([&]() -> Program::mode {
                                                                         return paused();
                                                                     })())
                                                                 :
-                                                                    (true ? 
+                                                                    (((((guid1112).e2).tag == 3) && ((((guid1112).e1).tag == 1) && true)) ? 
                                                                         (([&]() -> Program::mode {
-                                                                            return prevMode;
+                                                                            return (([&]() -> Program::mode {
+                                                                                Setting::reset(timeRemaining);
+                                                                                return setting();
+                                                                            })());
                                                                         })())
                                                                     :
-                                                                        juniper::quit<Program::mode>()))))));
+                                                                        (true ? 
+                                                                            (([&]() -> Program::mode {
+                                                                                return prevMode;
+                                                                            })())
+                                                                        :
+                                                                            juniper::quit<Program::mode>())))))));
                                             })());
                                         })())
                                     :
@@ -3622,41 +3956,29 @@ namespace Program {
                         if (!(true)) {
                             juniper::quit<Prelude::unit>();
                         }
-                        Prelude::sig<Program::mode> modeSig = guid966;
+                        Prelude::sig<Program::mode> modeSig = guid1110;
                         
                         Signal::sink<Program::mode>(juniper::function<Prelude::unit(Program::mode)>([=](Program::mode m) mutable -> Prelude::unit { 
                             return (([&]() -> Prelude::unit {
-                                Program::mode guid969 = m;
-                                return ((((guid969).tag == 0) && true) ? 
+                                Program::mode guid1113 = m;
+                                return ((((guid1113).tag == 0) && true) ? 
                                     (([&]() -> Prelude::unit {
-                                        return (([&]() -> Prelude::unit {
-                                            FastLed::setLedColor(0, red, leds);
-                                            return Setting::execute(timeRemaining, leds);
-                                        })());
+                                        return Setting::execute(timeRemaining);
                                     })())
                                 :
-                                    ((((guid969).tag == 1) && true) ? 
+                                    ((((guid1113).tag == 1) && true) ? 
                                         (([&]() -> Prelude::unit {
-                                            return (([&]() -> Prelude::unit {
-                                                FastLed::setLedColor(1, green, leds);
-                                                return Timing::execute();
-                                            })());
+                                            return Timing::execute(timeRemaining, (*((totalTime).get())));
                                         })())
                                     :
-                                        ((((guid969).tag == 2) && true) ? 
+                                        ((((guid1113).tag == 2) && true) ? 
                                             (([&]() -> Prelude::unit {
-                                                return (([&]() -> Prelude::unit {
-                                                    FastLed::setLedColor(2, blue, leds);
-                                                    return Paused::execute();
-                                                })());
+                                                return Paused::execute(timeRemaining, (*((totalTime).get())));
                                             })())
                                         :
-                                            ((((guid969).tag == 3) && true) ? 
+                                            ((((guid1113).tag == 3) && true) ? 
                                                 (([&]() -> Prelude::unit {
-                                                    return (([&]() -> Prelude::unit {
-                                                        FastLed::setLedColor(3, white, leds);
-                                                        return Finale::execute();
-                                                    })());
+                                                    return Finale::execute();
                                                 })())
                                             :
                                                 juniper::quit<Prelude::unit>()))));
