@@ -1,15 +1,14 @@
 module Paused
-open(Prelude, Constants)
-export(execute)
+open(Prelude, Constants, FastLed)
 
-fun execute(timeRemaining : int32 ref, totalTime : int32) : unit = (
+fun execute(timeRemaining, totalTime) = (
     let t = !timeRemaining;
     Timing:execute(timeRemaining, totalTime);
     set ref timeRemaining = t;
     let multiplier : float = 0.5 * (Math:sin_(2.0 * Math:pi * Time:now() / 1000.0) + 1.0);
-    for i : int32 in 0 to numLeds - 1 do (
-        let FastLed:color {r=r; g=g; b=b} = FastLed:getLedColor(i, leds);
-        let newColor = FastLed:color {r=r*multiplier; g=g*multiplier; b=b*multiplier};
-        FastLed:setLedColor(i, newColor, leds)
+    for i in 0 to numLeds - 1 do (
+        let color {r=r; g=g; b=b} = FastLed:getLedColor(i, leds);
+        let newColor = color {r=r*multiplier; g=g*multiplier; b=b*multiplier};
+        setLedColor(i, newColor, leds)
     ) end
 )

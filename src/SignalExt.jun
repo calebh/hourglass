@@ -1,25 +1,32 @@
 module SignalExt
 open(Prelude)
-export(constant, meta)
 
-fun constant<'a>(val : 'a) : sig<'a> =
-    signal<'a>(just<'a>(val))
+fun constant(val) =
+    signal(just(val))
 
-fun meta<'a>(sigA : sig<'a>) : sig<maybe<'a>> = (
-    let signal<'a>(val) = sigA;
-    constant<maybe<'a>>(val)
+fun meta(sigA) = (
+    let signal(val) = sigA;
+    constant(val)
 )
 
-fun unmeta<'a>(sigA : sig<maybe<'a>>) : sig<'a> =
+fun unmeta<'a>(sigA) =
     case sigA of
-    | signal<maybe<'a>>(just<maybe<'a>>(just<'a>(val))) =>
-        constant<'a>(val)
+    | signal(just(just(val))) =>
+        constant(val)
     | _ =>
-        signal<'a>(nothing<'a>())
+        signal(nothing())
     end
 
-fun zip<'a,'b>(sigA : sig<'a>, sigB : sig<'b>, state : ('a * 'b) ref) : sig<('a * 'b)> =
-    Signal:map2<'a,'b,('a*'b)>(
-        fn (valA : 'a, valB : 'b) : ('a * 'b) ->
-            (valA, valB),
-        sigA, sigB, state)
+fun zip(sigA, sigB, state) =
+    Signal:map2(fn (valA, valB) -> (valA, valB) end, sigA, sigB, state)
+
+fun toggle(val1, val2, state, incoming) =
+    incoming |>
+    Signal:foldP(
+        fn (event, prevVal) ->
+            if prevVal == val1 then
+                val2
+            else
+                val1
+            end
+        end, state)

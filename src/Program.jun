@@ -10,16 +10,16 @@ type flip = flipUp
           | flipDown
           | flipFlat
 
-let accState : maybe<Accelerometer:orientation> ref = ref nothing<Accelerometer:orientation>()
-let modeState : mode ref = ref setting()
+let accState = ref nothing<Accelerometer:orientation>()
+let modeState = ref setting()
 
-let timeRemaining : int32 ref = ref 0
-let totalTime : int32 ref = ref 0
+let timeRemaining = ref 0
+let totalTime = ref 0
 
-fun setup() : unit =
+fun setup() =
     Time:wait(500)
 
-fun clearDisplay() : unit =
+fun clearDisplay() =
     for i : uint16 in 0 to numLeds - 1 do
         FastLed:setLedColor(i, blank, leds)
     end
@@ -30,56 +30,69 @@ fun main() : unit = (
         clearDisplay();
         // Grab the current accelerometer data
         // Drop repeats is used so we only get the changes in orientation
-        let accSig = Signal:dropRepeats<Accelerometer:orientation>(Accelerometer:getSignal(), accState);
+        let accSig = Signal:dropRepeats(Accelerometer:getSignal(), accState);
         let flipSig =
-            Signal:map<Accelerometer:orientation, flip>(
-                fn (o : Accelerometer:orientation) : flip ->
-                    case o of
-                    | Accelerometer:xUp() => flipUp()
-                    | Accelerometer:xDown() => flipDown()
-                    | _  => flipFlat()
-                    end, accSig);
+            accSig |>
+            Signal:map(fn (o) -> case o of
+                                 | Accelerometer:xUp() => flipUp()
+                                 | Accelerometer:xDown() => flipDown()
+                                 | _  => flipFlat()
+                                 end
+                       end);
         // Use the meta function since we cleared the display
         // at the start of the loop. We need to call the execute
         // functions for every tick
-        let metaFlipSig = SignalExt:meta<flip>(flipSig);
+        let metaFlipSig = SignalExt:meta(flipSig);
         // Determine the next mode using a state machine
         let modeSig =
-            Signal:foldP<maybe<flip>, mode>(
-                fn (f1 : maybe<flip>, prevMode : mode) : mode ->
+            metaFlipSig |>
+            Signal:foldP(
+                fn (maybeFlipEvent, prevMode) ->
                     // Time is up! Go to the finale
-                    if (prevMode == timing()) and (!timeRemaining <= 0) then
+                    if prevMode == timing() and (!timeRemaining) <= 0 then
                         finale()
                     else
-                        case f1 of
-                        | just<flip>(f2 : flip) =>
+                        case maybeFlipEvent of
+                        | just(flipEvent) =>
                             // There is a flip event on the metaFlipSig
-                            case (f2, prevMode) of
+                            case (flipEvent, prevMode) of
                             | (flipUp(), setting()) => (
                                 set ref totalTime = !timeRemaining;
                                 Timing:reset();
                                 timing())
-                            | (flipUp(),   paused())  => timing()
-                            | (flipDown(), timing())  => (Setting:reset(timeRemaining); setting())
-                            | (flipDown(), paused())  => (Setting:reset(timeRemaining); setting())
-                            | (flipFlat(), timing())  => paused()
-                            | (flipDown(),   finale())  => (Setting:reset(timeRemaining); setting())
+                            | (flipUp(),   paused()) =>
+                                timing()
+                            | (flipDown(), timing()) =>
+                                (Setting:reset(timeRemaining);
+                                setting())
+                            | (flipDown(), paused()) =>
+                                (Setting:reset(timeRemaining);
+                                setting())
+                            | (flipDown(), finale()) =>
+                                (Setting:reset(timeRemaining);
+                                setting())
+                            | (flipFlat(), timing()) =>
+                                paused()
                             | _ => prevMode
                             end
                         | _ =>
                             // There wasn't a flip event on the metaFlipSig
                             prevMode
                         end
-                    end, modeState, metaFlipSig);
-        Signal:sink<mode>(fn (m : mode) : unit ->
-            // Now execute some specific part of the signal graph
-            // based on the current mode
-            case m of
-            | setting() => Setting:execute(timeRemaining)
-            | timing() => Timing:execute(timeRemaining, !totalTime)
-            | paused() => Paused:execute(timeRemaining, !totalTime)
-            | finale() => Finale:execute()
-            end, modeSig);
+                    end
+                end, modeState);
+        modeSig |>
+        Signal:sink(
+            fn (m) ->
+                // Now execute some specific part of the signal graph
+                // based on the current mode
+                case m of
+                | setting() => Setting:execute(timeRemaining)
+                | timing() => Timing:execute(timeRemaining, !totalTime)
+                | paused() => Paused:execute(timeRemaining, !totalTime)
+                | finale() => Finale:execute()
+                end
+            end);
         FastLed:show()
     ) end
 )

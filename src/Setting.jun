@@ -1,18 +1,17 @@
 module Setting
 open(Prelude, Constants)
-export(execute)
 
 type timeSetting = { minutes : int32; fifteenSeconds : int32 }
 
-let bState : Button:buttonState ref = Button:state()
-let bEdgeState : Io:pinState ref = ref Io:low()
-let numLedsLit : timeSetting ref = ref (timeSetting {minutes=0; fifteenSeconds=0})
-let tState : Time:timerState ref = Time:state()
-let cursorState : Io:pinState ref = ref Io:low()
-let outputUpdateState : (Io:pinState * timeSetting) ref = ref (!cursorState, !numLedsLit)
-let outputState : (Io:pinState * timeSetting) ref = ref !outputUpdateState
+let bState = Button:state()
+let bEdgeState = ref Io:low()
+let numLedsLit = ref (timeSetting {minutes=0; fifteenSeconds=0})
+let tState = Time:state()
+let cursorState = ref Io:low()
+let outputUpdateState = ref (!cursorState, !numLedsLit)
+let outputState = ref !outputUpdateState
 
-fun reset(timeRemaining : int32 ref) : unit = (
+fun reset(timeRemaining) = (
     set ref numLedsLit = timeSetting {minutes=0; fifteenSeconds=0};
     set ref cursorState = Io:low();
     set ref outputUpdateState = (!cursorState, !numLedsLit);
@@ -28,9 +27,10 @@ fun execute(timeRemaining : int32 ref) : unit = (
             Button:debounce(Io:digIn(buttonPin), bState),
             bEdgeState);
     let numLedsLitUpdateSig =
-        Signal:foldP<unit,timeSetting>(
-            fn (u : unit, prevSetting : timeSetting) : timeSetting ->
-                (let timeSetting {
+        buttonSig |>
+        Signal:foldP(
+            fn (u, prevSetting) -> (
+                let timeSetting {
                     minutes=prevMinutes;
                     fifteenSeconds=prevFifteenSeconds} = prevSetting;
                 // For safety
@@ -44,30 +44,28 @@ fun execute(timeRemaining : int32 ref) : unit = (
                     timeSetting {
                         minutes = prevMinutes;
                         fifteenSeconds = prevFifteenSeconds + 1}
-                end),
-            numLedsLit, buttonSig);
+                end
+            ) end,
+            numLedsLit);
     // zip the cursor and button signal
-    let outputUpdateSig =
-        SignalExt:zip<Io:pinState,timeSetting>(
-            cursorSig, numLedsLitUpdateSig, outputUpdateState);
+    let outputUpdateSig = SignalExt:zip(cursorSig, numLedsLitUpdateSig, outputUpdateState);
     // Latch the output sig since we want the next sink call to
     // execute every frame
-    let outputSig =
-        Signal:latch<(Io:pinState * timeSetting)>(
-            outputUpdateSig, outputState);
-    Signal:sink<(Io:pinState * timeSetting)>(
-        fn (out : (Io:pinState * timeSetting)) : unit ->
-            (let (cursor, timeSetting {
+    let outputSig = Signal:latch(outputUpdateSig, outputState);
+    outputSig |>
+    Signal:sink(
+        fn (out) -> (
+           let (cursor, timeSetting {
                               minutes = numMinutes;
                               fifteenSeconds = numFifteenSeconds}) = out;
             set ref timeRemaining = (numMinutes * 60000) +
                                     (numFifteenSeconds * 15000);
             // Draw the number of minutes
-            for i : int32 in 0 to numMinutes - 1 do
+            for i in 0 to numMinutes - 1 do
                 FastLed:setLedColor(numLeds - i - 1, blue, leds)
             end;
             // Draw the number of 15 seconds
-            for i : int32 in 0 to numFifteenSeconds - 1 do
+            for i in 0 to numFifteenSeconds - 1 do
                 FastLed:setLedColor(numLeds - (numMinutes + i) - 1, pink, leds)
             end;
             case cursor of
@@ -77,6 +75,6 @@ fun execute(timeRemaining : int32 ref) : unit = (
                     white, leds)
             | _ =>
                 ()
-            end),
-        outputSig)
+            end
+        ) end)
 )

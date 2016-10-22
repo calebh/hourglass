@@ -1,15 +1,14 @@
 module Constants
 open(Prelude)
-export(blank, red, green, blue, pink, white, buttonPin, numLeds, leds)
 
-let blank : FastLed:color = FastLed:color {r=0; g=0; b=0 }
-let red : FastLed:color = FastLed:color {r=255; g=0; b=0 }
-let green : FastLed:color = FastLed:color {r=0; g=255; b=0 }
-let blue : FastLed:color = FastLed:color {r=0; g=0; b=255 }
-let white : FastLed:color = FastLed:color {r=255; g=255; b=255 }
-let pink : FastLed:color = FastLed:color {r=255; g=50; b=100}
+let blank = FastLed:color {r=0; g=0; b=0 }
+let red = FastLed:color {r=255; g=0; b=0 }
+let green = FastLed:color {r=0; g=255; b=0 }
+let blue = FastLed:color {r=0; g=0; b=255 }
+let white = FastLed:color {r=255; g=255; b=255 }
+let pink = FastLed:color {r=255; g=50; b=100}
 
 let buttonPin : uint16 = 4
 let numLeds : uint16 = 33
 
-let leds : FastLed:fastLedStrip = FastLed:make(numLeds)
+let leds = FastLed:make(numLeds)

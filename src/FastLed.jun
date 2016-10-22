@@ -1,25 +1,24 @@
 module FastLed
 open(Prelude)
 include("<FastLED.h>")
-export(fastLedStrip, color, make, setLedColor, show)
 
 type fastLedStrip = { ptr : pointer }
 
 type color = { r : uint8; g : uint8; b : uint8 }
 
-fun make(numLeds : uint16) : fastLedStrip = (
+fun make(numLeds : uint16) = (
     let p = null;
     #
     CRGB *leds = new CRGB[numLeds];
     p.set((void *) leds);
     FastLED.addLeds<WS2812, 6, RGB>(leds, numLeds);
-    //FastLED.setBrightness(MAX_BRIGHTNESS);
     #;
     Io:setPinMode(6, Io:output());
     fastLedStrip { ptr = p }
 )
 
-fun setLedColor(n : uint16, c : color, strip : fastLedStrip) : unit = (
+fun setLedColor(n : uint16, c, strip) = (
+    let fastLedStrip {ptr=p} = strip;
     let p = strip.ptr;
     let r = c.r;
     let g = c.g;
@@ -27,8 +26,8 @@ fun setLedColor(n : uint16, c : color, strip : fastLedStrip) : unit = (
     #((CRGB *) p.get())[n] = CRGB(g, r, b);#
 )
 
-fun getLedColor(n : uint16, strip : fastLedStrip) : color = (
-    let p = strip.ptr;
+fun getLedColor(n : uint16, strip) = (
+    let fastLedStrip {ptr=p} = strip;
     let mutable r : uint8 = 0;
     let mutable g : uint8 = 0;
     let mutable b : uint8 = 0;

@@ -1,11 +1,10 @@
 module Finale
 open(Prelude, Constants)
-export(execute)
 
 let numLedsF : float = numLeds
 
-fun execute() : unit =
-    for i : int32 in 0 to numLeds - 1 do (
+fun execute() =
+    for i in 0 to numLeds - 1 do (
         let t = Time:now();
         let x = ((i / numLedsF) * 1000) + t;
         let color = FastLed:color { r = 50 * Math:sin_(2.0 * Math:pi * x / 1000.0);
