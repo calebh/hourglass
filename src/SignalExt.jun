@@ -9,7 +9,7 @@ fun meta(sigA) = (
     constant(val)
 )
 
-fun unmeta<'a>(sigA) =
+fun unmeta(sigA) =
     case sigA of
     | signal(just(just(val))) =>
         constant(val)
